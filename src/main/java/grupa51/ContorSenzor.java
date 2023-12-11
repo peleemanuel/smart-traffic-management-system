@@ -14,35 +14,35 @@ public class ContorSenzor {
     //setter
     public void schimbaStare(boolean stare)
     {
-        enable=stare;
+        this.enable=stare;
     }
 
     //setter
     public void setNumarMasini(int nrMasini)
     {
-        numarMasiniDetectate=nrMasini;
+        this.numarMasiniDetectate=nrMasini;
     }
 
     //getter
     public int getNumarMasini()
     {
-        return numarMasiniDetectate;
+        return this.numarMasiniDetectate;
     }
 
     //getter
     public boolean getEnable(){
-        return enable;
+        return this.enable;
     }
 
     //daca enable=false numarul de masini raname acelasi
     public void incrementNumarMasini(){
-        if(enable==true)
+        if(this.enable==true)
         {
-            numarMasiniDetectate++;
+            this.numarMasiniDetectate++;
         }
     }
 
     public void reseteazaContor(){
-        numarMasiniDetectate=0;
+        this.numarMasiniDetectate=0;
     }
 }

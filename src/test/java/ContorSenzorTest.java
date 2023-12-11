@@ -27,10 +27,9 @@ public class ContorSenzorTest {
 
         //action
         senzor1.setNumarMasini(10);
-        int numarMasini=senzor1.getNumarMasini();
 
         //assertion
-        assertEquals(10, numarMasini);
+        assertEquals(10, senzor1.getNumarMasini());
     }
 
     @Test
@@ -40,11 +39,8 @@ public class ContorSenzorTest {
         //setup
         ContorSenzor senzor = new ContorSenzor(true, 0);
 
-        //action
-        int numarMasini=senzor.getNumarMasini();
-
         //assertion
-        assertEquals(0, numarMasini);
+        assertEquals(0, senzor.getNumarMasini());
     }
 
     @Test
@@ -54,11 +50,8 @@ public class ContorSenzorTest {
         //setup
         ContorSenzor senzor1 = new ContorSenzor(false, 5);
 
-        //action
-        boolean enable=senzor1.getEnable();
-
         //assertion
-        assertEquals(false, enable);
+        assertEquals(false,senzor1.getEnable() );
     }
 
     @Test
@@ -66,23 +59,22 @@ public class ContorSenzorTest {
     public void testIncrementNumarMasini()
     {
         //setup
-        ContorSenzor senzor1 = new ContorSenzor(false, 0);
+        ContorSenzor senzor1 = new ContorSenzor(false, 5);
 
-        ///aici se poate vedea cazul in care enable este fals iar numarul de masini nu se incrementeaza
         //action
+        ///aici se poate vedea cazul in care enable este fals iar numarul de masini nu se incrementeaza
         senzor1.incrementNumarMasini();
-        int numarMasini=senzor1.getNumarMasini();
 
         //assertion
-        assertEquals(0, numarMasini);
+        assertEquals(5, senzor1.getNumarMasini());
 
-        ///aici se poate vedea cazul in care enable este true iar numarul de masini se incrementeaza
         //action
+        //aici se poate vedea cazul in care enable este true iar numarul de masini se incrementeaza
         senzor1.schimbaStare(true);
         senzor1.incrementNumarMasini();
 
         //assertion
-        assertEquals(1, senzor1.getNumarMasini());
+        assertEquals(6, senzor1.getNumarMasini());
     }
 
     @Test
@@ -90,16 +82,13 @@ public class ContorSenzorTest {
     public void testReseteazaContor()
     {
         //setup
-        ContorSenzor senzor1 = new ContorSenzor(false, 0);
+        ContorSenzor senzor1 = new ContorSenzor(false, 5);
 
         //action
-        //am setat numarul de masini pe o valoare diferita pentru a putea observa daca reseteazaContor pune appoi valoarea pe 0
-        senzor1.setNumarMasini(5);
-        //assertEquals(5,senzor1.getNumarMasini());
+        assertEquals(5,senzor1.getNumarMasini()); //testez numarul de masini inainte sa fiu sigura ca e diferit de 0 si ca va deveni 0 doar in momentul in care dau reset
         senzor1.reseteazaContor();
-        int numarMasini= senzor1.getNumarMasini();
 
         //assertion
-        assertEquals(0, numarMasini);
+        assertEquals(0, senzor1.getNumarMasini());
     }
 }
