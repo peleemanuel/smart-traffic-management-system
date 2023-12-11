@@ -1,0 +1,35 @@
+name: Java CI with Gradle
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up JDK 20
+      uses: actions/setup-java@v2
+      with:
+        java-version: '20'
+        distribution: 'temurin' # sau alege alt distribuitor de JDK dacă preferi
+
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+
+    - name: Cache Gradle packages
+      uses: actions/cache@v2
+      with:
+        path: |
+          ~/.gradle/caches
+          ~/.gradle/wrapper
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+        restore-keys: |
+          ${{ runner.os }}-gradle-
+
+    - name: Build with Gradle
+      run: ./gradlew build
+
+    - name: Run tests
+      run: ./gradlew test
