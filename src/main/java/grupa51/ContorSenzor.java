@@ -1,5 +1,5 @@
 package grupa51;
-
+//aceasta clasa are rolul de a simula senzorul cu contor ce aduna cate masini trec pe sub semafor daca sistemul este activ (enable=true)
 public class ContorSenzor {
     private boolean enable;
     private int numarMasiniDetectate;
@@ -7,8 +7,8 @@ public class ContorSenzor {
     //contructor
    public ContorSenzor(boolean enable, int numarMasiniDetectate)
     {
-        enable=enable;
-        numarMasiniDetectate=numarMasiniDetectate;
+        this.enable=enable;
+        this.numarMasiniDetectate=numarMasiniDetectate;
     }
 
     //setter
