@@ -23,7 +23,7 @@ public class MemorieTest {
         assertEquals(Memorie.getTMIN(),20,"TMIN should be 20");
     }
 
-    @DisplayName("Test GetTMIN")
+    @DisplayName("Test GetTMAX")
     @Test
     public void testGetTMAX(){
         assertEquals(Memorie.getTMAX(),40,"TMAX should be 40");
@@ -41,10 +41,10 @@ public class MemorieTest {
         assertEquals(Memorie.getTDIF(),20,"TDIF should be 20");
     }
 
-    @DisplayName("Test GetTMIN")
+    @DisplayName("Test GetKINIT")
     @Test
     public void testGetKINIT(){
-        assertEquals(Memorie.getKINIT(),1,"KINIT should be 20");
+        assertEquals(Memorie.getKINIT(),1,"KINIT should be 1");
     }
 
     @Test
