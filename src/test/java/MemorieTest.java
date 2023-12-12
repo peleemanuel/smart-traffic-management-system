@@ -12,8 +12,8 @@ public class MemorieTest {
 
     @BeforeEach
     public void setUp(){
-        debite = new int[] {10, 20, 30};
-        coef = new int[] {3, 4, 5};
+        debite = new int[] {10, 20, 30,40};
+        coef = new int[] {3, 4, 5, 6};
         memorie=new Memorie(debite,coef);
     }
 
@@ -52,7 +52,7 @@ public class MemorieTest {
     public void testGetSetDebite() {
         assertArrayEquals(debite, memorie.getDebite(), "Debite array should match initial values");
 
-        int[] newDebite = new int[] {40, 50, 60};
+        int[] newDebite = new int[] {40, 50, 60, 70};
         memorie.setDebite(newDebite);
         assertArrayEquals(newDebite, memorie.getDebite(), "Debite array should match new values");
     }
@@ -62,7 +62,7 @@ public class MemorieTest {
     public void testGetSetCoef() {
         assertArrayEquals(coef, memorie.getCoef(), "Coef array should match initial values");
 
-        int[] newCoef = new int[] {6, 7, 8};
+        int[] newCoef = new int[] {6, 7, 8, 9};
         memorie.setCoef(newCoef);
         assertArrayEquals(newCoef, memorie.getCoef(), "Coef array should match new values");
     }

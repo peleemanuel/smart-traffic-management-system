@@ -9,8 +9,8 @@ public class Memorie {
     private static int TDIF = 20;
     private static int KINIT = 1;
 
-    private int[] debite = new int[3];
-    private int[] coef = new int[3];
+    private int[] debite = new int[4];
+    private int[] coef = new int[4];
 
     public Memorie(int[] debite, int[] coef) {
         this.debite = debite;
