@@ -1,5 +1,7 @@
 package grupa51;
 
+// Aecasta clasa are rolul de a mima un semafor ce are capacitatea de control asupra senzorilor specifici 
+// pentru banda pe care o coordoneaza
 public class Semafor {
     private ContorSenzor[] contori=new ContorSenzor[3];
     private FlagSenzor[] flaguri=new FlagSenzor[3];
