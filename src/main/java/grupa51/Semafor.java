@@ -34,4 +34,28 @@ public class Semafor {
     {
         return this.culoare;
     }
+
+    //punem pe true toate variabilele contori
+    public void enableContori(){
+            for( ContorSenzor contori : this.contori ){
+                contori.schimbaStare(true);
+            }
+    }
+
+    //punem pe flase toate variabilele contori
+    public void disableContori(){
+        for( ContorSenzor contori : this.contori ){
+            contori.schimbaStare(false);
+        }
+    }
+
+    public int checkFlags(){
+        int contor=0;
+        for ( FlagSenzor flaguri : this.flaguri ){
+            if (flaguri.getStatus())
+                contor++;
+        }
+        return contor;
+    }
 }
+

@@ -53,5 +53,36 @@ public class SemaforTest {
         semafor.setCuloareSemafor("Verde");
         assertEquals("Verde", semafor.getCuloareSemafor());
     }
+
+    @DisplayName("Test pentru enableContori")
+    @Test
+    void testEnableContori(){
+        semafor.enableContori();
+        for( ContorSenzor contori : contori){
+            assertTrue(contori.getEnable());
+        }
     }
+
+    @DisplayName("Test pentru disableContori")
+    @Test
+    void testDisableContori(){
+        semafor.disableContori();
+        for ( ContorSenzor contori : contori ){
+            assertFalse(contori.getEnable());
+        }
+    }
+
+    @DisplayName("Test pentru checkFlags")
+    @Test
+    void testCheckFlags(){
+        //setam unele flag urile ca fiind active, si unul inactiv
+        flaguri[0].setStatus(true);
+        flaguri[1].setStatus(false);
+        flaguri[2].setStatus(true);
+
+        assertEquals(2,semafor.checkFlags());
+    }
+
+
+}
 
