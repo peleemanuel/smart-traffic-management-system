@@ -1,0 +1,33 @@
+	      	 Begin: Tmax:=40, Tmin:=20, Kinit:=1, index:=0, cold:=1, Tmed:=30, Tdif:=20, Tverde:=30, Debit[0]:=0, Debit[1]:=0, Debit[2]:=0, Debit[3]:=0;
+		 	 Verde:	set_semafor_verde(index), set_enable_counter(index), reset_counter(index);
+	   Verif_verde:	if Tverde == 0 then go to Check_emergency
+					Tverde:=Tverde-1, go to Verif_verde;
+   Check_emergency:	if emergency == 0 then go to Galben
+	  	 Emergency:	set_semafor_rosu(index);
+					if emergency0 == 1 then go to Set_verde;
+					if emergency1 == 1 then
+					index:=index + 1, go to Set_rosu;
+					if emergency2 == 1 then 
+					index:=index + 2, go to Set_rosu;
+					if emergency3 == 1 then 
+					index:=index + 3, go to Set_rosu;
+	  	 Set_verde:	set_semafor_verde(index);
+	    Stai_verde:	if emergency == 0 then go to Galben
+					go to Stai_verde
+		    Galben:	set_disabled_counter(index), Debit[index]:=counter[index] + counter[index + 1] + counter[index + 2], Suma_debite:= Debit[0] + Debit[1] + Debit[2] + Debit[3], K[index+1]:=Kinit + cmp_importanta(index+1, index) + cmp_importanta(index+1, index+2) + cmp_importanta(index+1, index+3);
+					if cold == 1 then Tverde:=Tmed, go to Test index;
+					Tverde:=Tmin + K[index+1]*(Debit[index+1]/Suma_debite)*Tdif;
+					if emergency == 0 then go to Test index;
+					go to Emergency;
+   	    Test index:	if index != 3 then go to Increment index;
+					cold:=0;
+   Increment index:	index:=index+1;
+		  	  Rosu:	set_semafor_rosu(index);
+					if Debit[0] != 0 || Deb1t[1] != 0 || Debit[2] != 0 || Debit[3] != 0 then go to Emergency;
+Galben intermitent:	Tgalben:=120, set_enabled_counter(0), set_enabled_counter(1), set_enabled_counter(2), set_enabled_counter(3);
+ Check timp galben:	if Tgalben == 0 then go to Suma debite;
+					Tgalben:=Tgalben-1, go to Check timp galben;
+	   Suma debite:	Suma_debite:=Debit[0] + Debit[1] + Debit[2] + Debit[3];
+	   				if Suma_debite < 10 then go to Galben intermitent;
+					go to Verde;
+	   
