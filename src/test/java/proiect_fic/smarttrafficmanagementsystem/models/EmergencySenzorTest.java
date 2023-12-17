@@ -1,4 +1,6 @@
-import grupa51.EmergencySenzor;
+package proiect_fic.smarttrafficmanagementsystem.models;
+
+import proiect_fic.smarttrafficmanagementsystem.models.EmergencySenzor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

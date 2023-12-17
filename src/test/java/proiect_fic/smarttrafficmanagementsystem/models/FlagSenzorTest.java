@@ -1,6 +1,8 @@
-import grupa51.*;
+package proiect_fic.smarttrafficmanagementsystem.models;
 
 import org.junit.jupiter.api.Test;
+import proiect_fic.smarttrafficmanagementsystem.models.FlagSenzor;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class FlagSenzorTest {

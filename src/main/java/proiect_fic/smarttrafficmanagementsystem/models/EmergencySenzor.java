@@ -1,4 +1,4 @@
-package grupa51;
+package proiect_fic.smarttrafficmanagementsystem.models;
 
 /**
  * Clasa EmergencySenzor servește ca un detector pentru situații de urgență în cadrul unui sistem de control al semafoarelor.
@@ -13,6 +13,7 @@ public class EmergencySenzor {
 
     /**
      * Constructor pentru clasa EmergencySenzor care inițializează starea senzorului.
+     *
      * @param initialStatus Starea inițială a senzorului de urgență, falsă dacă nu este activat.
      */
     public EmergencySenzor(boolean initialStatus) {
@@ -21,6 +22,7 @@ public class EmergencySenzor {
 
     /**
      * Returnează starea curentă a senzorului de urgență.
+     *
      * @return boolean - Adevărat dacă senzorul este activat, fals în caz contrar.
      */
     public boolean getStatus() {
@@ -29,6 +31,7 @@ public class EmergencySenzor {
 
     /**
      * Setează starea senzorului de urgență.
+     *
      * @param status Starea dorită pentru senzorul de urgență, adevărat pentru activat.
      */
     public void setStatus(boolean status) {
