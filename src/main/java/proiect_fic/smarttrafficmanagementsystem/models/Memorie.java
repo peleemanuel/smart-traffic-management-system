@@ -1,7 +1,8 @@
-package grupa51;
+package proiect_fic.smarttrafficmanagementsystem.models;
+
 /**
-*Aceasta clasa are rolul de a  a gestiona memoria sistemului si a contribui la logica de gestionare a traficului.
-**/
+ * Aceasta clasa are rolul de a  a gestiona memoria sistemului si a contribui la logica de gestionare a traficului.
+ **/
 public class Memorie {
     private static int TMIN = 20;
     private static int TMAX = 40;

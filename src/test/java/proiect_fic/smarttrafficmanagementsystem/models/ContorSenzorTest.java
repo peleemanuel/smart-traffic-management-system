@@ -1,7 +1,10 @@
-import grupa51.ContorSenzor;
+package proiect_fic.smarttrafficmanagementsystem.models;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class ContorSenzorTest {
     @Test
     @DisplayName("Test pentru schimbareStare")
@@ -13,15 +16,14 @@ public class ContorSenzorTest {
         senzor1.schimbaStare(true);
 
         //assertion
-        assertEquals(true, senzor1.getEnable());
+        assertEquals(true, senzor1.getEnabled());
 
 
     }
 
     @Test
     @DisplayName("Test pentru setNumarMasini")
-    public void testSetNumarMasini()
-    {
+    public void testSetNumarMasini() {
         //setup
         ContorSenzor senzor1 = new ContorSenzor(false, 0);
 
@@ -34,8 +36,7 @@ public class ContorSenzorTest {
 
     @Test
     @DisplayName("Test pentru getNumarMasini")
-    public void testGetNumarMasini()
-    {
+    public void testGetNumarMasini() {
         //setup
         ContorSenzor senzor = new ContorSenzor(true, 0);
 
@@ -45,19 +46,17 @@ public class ContorSenzorTest {
 
     @Test
     @DisplayName("Test pentru getEnable")
-    public void testGetEnable()
-    {
+    public void testGetEnable() {
         //setup
         ContorSenzor senzor1 = new ContorSenzor(false, 5);
 
         //assertion
-        assertEquals(false,senzor1.getEnable() );
+        assertEquals(false, senzor1.getEnabled());
     }
 
     @Test
     @DisplayName("Test pentru  incrementNumarMasini")
-    public void testIncrementNumarMasini()
-    {
+    public void testIncrementNumarMasini() {
         //setup
         ContorSenzor senzor1 = new ContorSenzor(false, 5);
 
@@ -79,13 +78,12 @@ public class ContorSenzorTest {
 
     @Test
     @DisplayName("Test pentru  reseteazaContor")
-    public void testReseteazaContor()
-    {
+    public void testReseteazaContor() {
         //setup
         ContorSenzor senzor1 = new ContorSenzor(false, 5);
 
         //action
-        assertEquals(5,senzor1.getNumarMasini()); //testez numarul de masini inainte sa fiu sigura ca e diferit de 0 si ca va deveni 0 doar in momentul in care dau reset
+        assertEquals(5, senzor1.getNumarMasini()); //testez numarul de masini inainte sa fiu sigura ca e diferit de 0 si ca va deveni 0 doar in momentul in care dau reset
         senzor1.reseteazaContor();
 
         //assertion

@@ -1,36 +1,37 @@
-import grupa51.ContorSenzor;
-import grupa51.EmergencySenzor;
-import grupa51.FlagSenzor;
-import grupa51.Semafor;
+package proiect_fic.smarttrafficmanagementsystem.models;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+
 public class SemaforTest {
     private Semafor semafor;
     private ContorSenzor[] contori;
     private FlagSenzor[] flaguri;
     private EmergencySenzor emergencySenzor;
+
     @BeforeEach
     void setUp() {
         // inițializare array ContorSenzor
-         contori = new ContorSenzor[]{
+        contori = new ContorSenzor[]{
                 new ContorSenzor(false, 5),
                 new ContorSenzor(true, 10),
                 new ContorSenzor(true, 15)
         };
 
-         //initializare array flaguri
-        flaguri=new FlagSenzor[]{
-             new FlagSenzor(true),
-             new FlagSenzor(false),
-             new FlagSenzor(false)
+        //initializare array flaguri
+        flaguri = new FlagSenzor[]{
+                new FlagSenzor(true),
+                new FlagSenzor(false),
+                new FlagSenzor(false)
         };
 
         // inițializare EmergencySenzor
-         emergencySenzor = new EmergencySenzor(false);
+        emergencySenzor = new EmergencySenzor(false);
 
         // inițializare Semafor
         semafor = new Semafor(contori, flaguri, emergencySenzor, "Rosu");
@@ -56,31 +57,31 @@ public class SemaforTest {
 
     @DisplayName("Test pentru enableContori")
     @Test
-    void testEnableContori(){
+    void testEnableContori() {
         semafor.enableContori();
-        for( ContorSenzor contori : contori){
-            assertTrue(contori.getEnable());
+        for (ContorSenzor contori : contori) {
+            assertTrue(contori.getEnabled());
         }
     }
 
     @DisplayName("Test pentru disableContori")
     @Test
-    void testDisableContori(){
+    void testDisableContori() {
         semafor.disableContori();
-        for ( ContorSenzor contori : contori ){
-            assertFalse(contori.getEnable());
+        for (ContorSenzor contori : contori) {
+            assertFalse(contori.getEnabled());
         }
     }
 
     @DisplayName("Test pentru checkFlags")
     @Test
-    void testCheckFlags(){
+    void testCheckFlags() {
         //setam unele flag urile ca fiind active, si unul inactiv
         flaguri[0].setStatus(true);
         flaguri[1].setStatus(false);
         flaguri[2].setStatus(true);
 
-        assertEquals(2,semafor.checkFlags());
+        assertEquals(2, semafor.checkFlags());
     }
 
 
