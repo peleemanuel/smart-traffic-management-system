@@ -31,6 +31,17 @@ public class Semafor {
         return this.culoare;
     }
 
+    //getter
+
+    public FlagSenzor[] getFlaguri() {
+        return flaguri;
+    }
+
+    //getter
+    public ContorSenzor[] getContori() {
+        return contori;
+    }
+
     //punem pe true toate variabilele contori
     public void enableContori() {
         for (ContorSenzor contori : this.contori) {
