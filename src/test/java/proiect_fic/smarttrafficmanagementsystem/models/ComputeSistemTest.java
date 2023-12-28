@@ -8,14 +8,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ComputeSistemTest {
     private ComputeSistem computeSistem;
-    private int[] coef = {1, 1, 1, 1};
+    private float[] coef = {1, 1, 1, 1};
     private int[] debite = {0, 0, 0, 0};
     private int timpVerde = 120;
     private int timpGalben = 60;
     private int index = 0;
     private int sumaDebite = 0;
     private boolean coldstart = false;
-    private Memorie mem=new Memorie(coef, debite);
+    private Memorie mem = new Memorie(debite, coef);
+
     @BeforeEach
     public void setUp() {
         // inițializare array ContorSenzor
@@ -71,7 +72,7 @@ public class ComputeSistemTest {
     @Test
     public void testScadereRepetataTimp() {
         int timpGalbenInitial = computeSistem.getTimpGalben();
-        computeSistem.scadereRepetataTimp();
+
         assertEquals(timpGalbenInitial - 1, computeSistem.getTimpGalben());
     }
 
@@ -89,7 +90,7 @@ public class ComputeSistemTest {
     @Test
     public void testCalculTimpVerdeUrmator() {
         int index = 3;
-        int[] coef = {1, 1, 1, 1};
+        float[] coef = {1, 1, 1, 1};
         int[] debite = {10, 20, 10, 30};
         mem.setDebite(debite);
         mem.setCoef(coef);
@@ -155,12 +156,11 @@ public class ComputeSistemTest {
     }
 
     @Test
-    public void testCalculCoeficient()
-    {
+    public void testCalculCoeficient() {
         //testam pt semaforul cu indexul 1
 
         computeSistem.calculCoeficient(1);
 
-        assertEquals(mem.getCoefSemafor(1), 7);
+        assertEquals(1.5999999046325684, mem.getCoefSemafor(1));
     }
 }

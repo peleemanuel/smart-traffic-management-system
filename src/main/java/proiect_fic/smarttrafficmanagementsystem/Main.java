@@ -15,6 +15,7 @@ public class Main extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
         stage.setTitle("Traffic Management");
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
     }
 

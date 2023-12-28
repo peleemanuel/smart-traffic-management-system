@@ -17,7 +17,7 @@ public class ComputeSistem {
         this.index = index;
         this.sumaDebite = sumaDebite;
         this.coldstart = coldstart;
-        this.mem=mem;
+        this.mem = mem;
     }
 
     // begin getters and setters
@@ -75,26 +75,21 @@ public class ComputeSistem {
     //initializarea sistemului
     public void initSystem() {
         timpVerde = 0;
-        timpGalben = 600; //am pus un timp de galben random de 10 min, timpul e in secunde deci valoarea va fi 600
+        timpGalben = Memorie.getTMED();
         index = 0;
         sumaDebite = 0;
-
-        int[] debite=new int[4];
-        int[] coef=new int[4];
+        coldstart = true;
+        int[] debite = new int[4];
+        float[] coef = new float[4];
         for (int i = 0; i < 4; i++) {
             debite[i] = 0;
-            coef[i] = 1;
+            coef[i] = Memorie.getKINIT();
         }
+
         mem.setCoef(coef);
         mem.setDebite(debite);
     }
 
-    //functia asta imi initializeaza timpul de galben intermitent
-    //ma voi folosi de ea pt contextul in care sistemul numara cate masini trec in 2 min
-    //daca trec mai putin de 10 raman pe galben intermitent, daca nu sistemul se reseteaza
-    public void scadereRepetataTimp() {
-        this.timpGalben = this.timpGalben - 1;
-    } //scadem cate o secunda
 
     //dupa un ciclu complet ma uit la statusul intersectiei daca am un debit total de 0 sau mai mic decat 10 raman pe galben intermitent
     //altfel sistemul se reseteaza => coldstart=true
@@ -107,12 +102,11 @@ public class ComputeSistem {
             }
 
             if (sumaDebite >= 0 && sumaDebite < 10) {
-                scadereRepetataTimp(); //timpul de galben mai scade cu 2 min
-                coldstart = false;
+                continue;
 
             } else {
                 initSystem(); //sistemul se reinitializeaza
-                coldstart = true;
+
             }
         }
         return coldstart;
@@ -122,7 +116,7 @@ public class ComputeSistem {
     //aceasta functie are ca parametru index-ul semaforului pt care calculez timpul
     //Tverde(i+1) = Tmin + k*(Debit(i+1)/Sum(Debit(i+2,..)) * (Tmax-Tmin)
     public int calculTimpVerdeUrmator(int index) {
-        timpVerde = Memorie.getTMIN() + mem.getCoefSemafor(index) * mem.getDebitSemfor(index) * (Memorie.getTMAX() - Memorie.getTMIN());
+        timpVerde = (int) (Memorie.getTMIN() + mem.getCoefSemafor(index) * mem.getDebitSemfor(index) * (Memorie.getTMAX() - Memorie.getTMIN())); //! debit(index)/ suma_debite
         return timpVerde;
     }
 
@@ -139,7 +133,7 @@ public class ComputeSistem {
     //daca semaforul e galben atunci fiecare counter de la semafor va fi pus pe disable si valorile lor se aduna intr-un registru pentru semaforul actual
     public void statusGalben() {
         for (int i = 0; i < 4; i++) {
-            int rez=0;
+            int rez = 0;
             if (semafoare[i].getCuloareSemafor().toUpperCase() == "GALBEN") {
                 semafoare[i].disableContori();
                 for (ContorSenzor c : semafoare[i].getContori()) {
@@ -175,13 +169,14 @@ public class ComputeSistem {
     //atunci pt semaforul respectiv voi apela aceasta functie
     public void statusGalbenDupaStatusEmergency(Semafor semaforUrgenta) {
         //verific daca semnalul de urgenta nu mai e activ, in acest caz semaforul e pus pe galben
-            if (semaforUrgenta.checkEmergency() == false) {
-                semaforUrgenta.setCuloareSemafor("GALBEN");
-            }
+        if (semaforUrgenta.checkEmergency() == false) {
+            semaforUrgenta.setCuloareSemafor("GALBEN");
+        }
     }
 
     //functia calculeaza pe baza a doi vectori de flaguri cate elemente difera
     //se foloseste pt a calcula coeficientul de importanta k
+    // ************** TREBUIE REFACUTA METODA
     protected int flagDiff(FlagSenzor[] flaguri1, FlagSenzor[] flaguri2) {
         int diffFlag = 0; //variabila care retine cate flag-uri sunt diferite
         for (int i = 0; i < 3; i++) {
@@ -197,11 +192,11 @@ public class ComputeSistem {
     //k(i) = kinit + Flag_diff(flags[i], flags[i+1]) + Flag_diff(flags[i], flags[i+2]) + Flag_diff(flags[i], flags[i+3]) (factorii de diferenta a flagurilor).
     public void calculCoeficient(int index) {
         //initializarea coeicientului de importanta pentru semaforul cu indexul dat ca parametru
-        int rez = Memorie.getKINIT();
+        float rez = Memorie.getKINIT();
 
         for (int i = 0; i < 4; i++) {
             if (i != index)
-                rez = rez + flagDiff(semafoare[i].getFlaguri(), semafoare[index].getFlaguri());
+                rez = (float) (rez + flagDiff(semafoare[i].getFlaguri(), semafoare[index].getFlaguri()) * 0.1);
         }
         mem.setCoefSemafor(index, rez);
     }
