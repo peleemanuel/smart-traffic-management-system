@@ -2,8 +2,7 @@ package proiect_fic.smarttrafficmanagementsystem.models;
 
 public class ComputeSistem {
     private Semafor[] semafoare = new Semafor[4];
-    private int[] debite = new int[4];
-    private int[] coef = new int[4];
+    private Memorie mem; //de aici obtin debite[], coef[] si alte constante
     private int timpVerde;
     private int timpGalben;
     private int index;
@@ -11,15 +10,14 @@ public class ComputeSistem {
     private boolean coldstart;
 
     // constructor
-    public ComputeSistem(Semafor[] semafoare, int[] coef, int[] debite, int timpVerde, int timpGalben, int index, int sumaDebite, boolean coldstart) {
+    public ComputeSistem(Semafor[] semafoare, Memorie mem, int timpVerde, int timpGalben, int index, int sumaDebite, boolean coldstart) {
         this.semafoare = semafoare;
         this.timpVerde = timpVerde;
         this.timpGalben = timpGalben;
         this.index = index;
         this.sumaDebite = sumaDebite;
         this.coldstart = coldstart;
-        this.coef = coef;
-        this.debite = debite;
+        this.mem=mem;
     }
 
     // begin getters and setters
@@ -52,15 +50,6 @@ public class ComputeSistem {
         this.index = index;
     }
 
-    public int[] getCoef() {
-        return coef;
-    }
-    public int getCoefSemafor(int index) {
-        return coef[index];
-    }
-    public void setCoef(int[] coef) {
-        this.coef = coef;
-    }
 
     public void setTimpGalben(int timpGalben) {
         this.timpGalben = timpGalben;
@@ -68,19 +57,6 @@ public class ComputeSistem {
 
     public int getSumaDebite() {
         return sumaDebite;
-    }
-
-    public int[] getDebite() {
-        return debite;
-    }
-
-    //returneaza debitul semaforului cu indexul dat ca parametru
-    public int getDebitSemfor(int index) {
-        return debite[index];
-    }
-
-    public void setDebite(int[] debite) {
-        this.debite = debite;
     }
 
     public void setSumaDebite(int sumaDebite) {
@@ -103,10 +79,14 @@ public class ComputeSistem {
         index = 0;
         sumaDebite = 0;
 
+        int[] debite=new int[4];
+        int[] coef=new int[4];
         for (int i = 0; i < 4; i++) {
             debite[i] = 0;
             coef[i] = 1;
         }
+        mem.setCoef(coef);
+        mem.setDebite(debite);
     }
 
     //functia asta imi initializeaza timpul de galben intermitent
@@ -123,7 +103,7 @@ public class ComputeSistem {
 
         while (timpGalben != 0 || coldstart == false) {
             for (int i = 0; i < 4; i++) {
-                sumaDebite = sumaDebite + debite[i];
+                sumaDebite = sumaDebite + mem.getDebitSemfor(i);
             }
 
             if (sumaDebite >= 0 && sumaDebite < 10) {
@@ -139,21 +119,10 @@ public class ComputeSistem {
     }
 
 
-    //calculeaza suma debitelor tuturor semafoarelor
-    //functia asa ma ajuta sa calculez timpVerde in functia calculTimpVerdeUrmator
-    protected int sumaDebiteSemafoare() {
-        int sum = 0;
-        for (int i = 0; i < 4; i++) {
-            sum = sum + debite[i];
-
-        }
-        return sum;
-    }
-
     //aceasta functie are ca parametru index-ul semaforului pt care calculez timpul
     //Tverde(i+1) = Tmin + k*(Debit(i+1)/Sum(Debit(i+2,..)) * (Tmax-Tmin)
     public int calculTimpVerdeUrmator(int index) {
-        timpVerde = Memorie.getTMIN() + coef[index] * debite[index] * (Memorie.getTMAX() - Memorie.getTMIN());
+        timpVerde = Memorie.getTMIN() + mem.getCoefSemafor(index) * mem.getDebitSemfor(index) * (Memorie.getTMAX() - Memorie.getTMIN());
         return timpVerde;
     }
 
@@ -170,13 +139,14 @@ public class ComputeSistem {
     //daca semaforul e galben atunci fiecare counter de la semafor va fi pus pe disable si valorile lor se aduna intr-un registru pentru semaforul actual
     public void statusGalben() {
         for (int i = 0; i < 4; i++) {
-            debite[i] = 0;
+            int rez=0;
             if (semafoare[i].getCuloareSemafor().toUpperCase() == "GALBEN") {
                 semafoare[i].disableContori();
                 for (ContorSenzor c : semafoare[i].getContori()) {
-                    debite[i] = debite[i] + c.getNumarMasini();
+                    rez = rez + c.getNumarMasini();
                 }
             }
+            mem.setDebitSemafor(i, rez);
         }
     }
 
@@ -227,11 +197,12 @@ public class ComputeSistem {
     //k(i) = kinit + Flag_diff(flags[i], flags[i+1]) + Flag_diff(flags[i], flags[i+2]) + Flag_diff(flags[i], flags[i+3]) (factorii de diferenta a flagurilor).
     public void calculCoeficient(int index) {
         //initializarea coeicientului de importanta pentru semaforul cu indexul dat ca parametru
-        coef[index] = Memorie.getKINIT();
+        int rez = Memorie.getKINIT();
 
         for (int i = 0; i < 4; i++) {
             if (i != index)
-                coef[index] = coef[index] + flagDiff(semafoare[i].getFlaguri(), semafoare[index].getFlaguri());
+                rez = rez + flagDiff(semafoare[i].getFlaguri(), semafoare[index].getFlaguri());
         }
+        mem.setCoefSemafor(index, rez);
     }
 }

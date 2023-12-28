@@ -46,14 +46,30 @@ public class Memorie {
     public int[] getCoef() {
         return this.coef;
     }
+    public int getCoefSemafor(int index) {
+        return coef[index];
+    }
+
+    //returneaza debitul semaforului cu indexul dat ca parametru
+    public int getDebitSemfor(int index) {
+        return debite[index];
+    }
 
     //settere
     public void setDebite(int[] debite) {
         this.debite = debite;
     }
-
+    public void setDebitSemafor(int index, int d)
+    {
+        this.debite[index]=d;
+    }
     public void setCoef(int[] coef) {
         this.coef = coef;
+    }
+
+    public void setCoefSemafor(int index, int c)
+    {
+        this.coef[index]=c;
     }
 
 }

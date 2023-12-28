@@ -8,7 +8,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ComputeSistemTest {
     private ComputeSistem computeSistem;
-
+    private int[] coef = {1, 1, 1, 1};
+    private int[] debite = {0, 0, 0, 0};
+    private int timpVerde = 120;
+    private int timpGalben = 60;
+    private int index = 0;
+    private int sumaDebite = 0;
+    private boolean coldstart = false;
+    private Memorie mem=new Memorie(coef, debite);
     @BeforeEach
     public void setUp() {
         // inițializare array ContorSenzor
@@ -47,16 +54,8 @@ public class ComputeSistemTest {
                         new Semafor(contori2, flaguri2, emergencySenzor1, "GALBEN"),
                 };
 
-        int[] coef = {1, 1, 1, 1};
-        int[] debite = {0, 0, 0, 0};
-        int timpVerde = 120;
-        int timpGalben = 60;
-        int index = 0;
-        int sumaDebite = 0;
-        boolean coldstart = false;
-
         // initializam computeSistem cu valorile de mai sus
-        computeSistem = new ComputeSistem(semafoare, coef, debite, timpVerde, timpGalben, index, sumaDebite, coldstart);
+        computeSistem = new ComputeSistem(semafoare, mem, timpVerde, timpGalben, index, sumaDebite, coldstart);
     }
 
     @DisplayName("Test pentru initSystem")
@@ -88,21 +87,12 @@ public class ComputeSistemTest {
     }*/
 
     @Test
-    public void testSumaDebiteSemafoare() {
-        int[] debite = {10, 20, 30, 10};
-        computeSistem.setDebite(debite);
-        assertEquals(computeSistem.sumaDebiteSemafoare(), 70);
-    }
-
-    @Test
     public void testCalculTimpVerdeUrmator() {
         int index = 3;
         int[] coef = {1, 1, 1, 1};
-        computeSistem.setCoef(coef);
-
         int[] debite = {10, 20, 10, 30};
-        computeSistem.setDebite(debite);
-
+        mem.setDebite(debite);
+        mem.setCoef(coef);
         assertEquals(computeSistem.calculTimpVerdeUrmator(index), 620);
 
     }
@@ -134,7 +124,7 @@ public class ComputeSistemTest {
         }
 
         //verific debitul semaforului galben
-        assertEquals(computeSistem.getDebitSemfor(3), 30);
+        assertEquals(mem.getDebitSemfor(3), 30);
     }
 
     //am testat 2 functii in acest test pentru ca ele depind una de alta
@@ -171,6 +161,6 @@ public class ComputeSistemTest {
 
         computeSistem.calculCoeficient(1);
 
-        assertEquals(computeSistem.getCoefSemafor(1), 7);
+        assertEquals(mem.getCoefSemafor(1), 7);
     }
 }
