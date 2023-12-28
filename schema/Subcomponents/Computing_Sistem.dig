@@ -125,6 +125,11 @@
       </elementAttributes>
       <pos x="2020" y="1400"/>
     </visualElement>
+    <visualElement>
+      <elementName>8Registers_encoded.dig</elementName>
+      <elementAttributes/>
+      <pos x="2440" y="1640"/>
+    </visualElement>
   </visualElements>
   <wires>
     <wire>
