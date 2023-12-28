@@ -21,6 +21,10 @@ public class Semafor {
         return this.emergency.getStatus();
     }
 
+    public void setContori(ContorSenzor[] contori) {
+        this.contori = contori;
+    }
+
     //setter
     public void setCuloareSemafor(String culoare) {
         this.culoare = culoare;
@@ -31,8 +35,11 @@ public class Semafor {
         return this.culoare;
     }
 
-    //getter
+    public void setEmergency(EmergencySenzor emergency) {
+        this.emergency = emergency;
+    }
 
+    //getter
     public FlagSenzor[] getFlaguri() {
         return flaguri;
     }
