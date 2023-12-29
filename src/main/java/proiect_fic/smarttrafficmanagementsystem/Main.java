@@ -15,7 +15,7 @@ public class Main extends Application {
     public void start(Stage stage) throws IOException {
 
         try {
-            Parent root = FXMLLoader.load(Main.class.getResource("fxmls/hello-view.fxml"));
+            Parent root = FXMLLoader.load(Main.class.getResource("fxmls/Main.fxml"));
             Image icon = new Image("file:src/main/resources/proiect_fic/smarttrafficmanagementsystem/icons/semafor_verde.png");
             stage.getIcons().add(icon);
             Scene scene = new Scene(root);
