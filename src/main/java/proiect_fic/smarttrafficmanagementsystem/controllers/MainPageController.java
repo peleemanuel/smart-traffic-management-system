@@ -25,6 +25,7 @@ public class MainPageController extends MainPageControllerVariables implements I
     private int index;
 
     private final Label[] semafoareLabels = new Label[4];
+    private final CheckBox[] emergencies = new CheckBox[4];
 
 
     @Override
@@ -33,7 +34,16 @@ public class MainPageController extends MainPageControllerVariables implements I
         semafoareImages[1] = new SemaforImages(rosu2, galben2, verde2);
         semafoareImages[2] = new SemaforImages(rosu3, galben3, verde3);
         semafoareImages[3] = new SemaforImages(rosu4, galben4, verde4);
-        updateColdStart(true);
+
+        semafoareLabels[0] = semafor1;
+        semafoareLabels[1] = semafor2;
+        semafoareLabels[2] = semafor3;
+        semafoareLabels[3] = semafor4;
+
+        emergencies[0] = emergency1;
+        emergencies[1] = emergency2;
+        emergencies[2] = emergency3;
+        emergencies[3] = emergency4;
         init();
     }
 
@@ -42,12 +52,9 @@ public class MainPageController extends MainPageControllerVariables implements I
         // Aici initializez valorile unde consider ca este necesar.
 
         /* Variabile locale */
-        semafoareLabels[0] = semafor1;
-        semafoareLabels[1] = semafor2;
-        semafoareLabels[2] = semafor3;
-        semafoareLabels[3] = semafor4;
         isEmergency = false;
         index = 0;
+        semaforEmergency = -1;
 
         /* FXML */
         // Initial semafoarele sunt rosii (pun pe invizibil semafoarele galben si verde)
@@ -59,6 +66,8 @@ public class MainPageController extends MainPageControllerVariables implements I
         this.verde3.setVisible(false);
         this.galben4.setVisible(false);
         this.verde4.setVisible(false);
+        next_state_button.setDisable(false);
+        enableAllEmergencyFlags();
 
         this.index_semafor_value.setText(String.valueOf(index + 1));
         this.Tverde_value.setText("30");
@@ -75,9 +84,10 @@ public class MainPageController extends MainPageControllerVariables implements I
         this.emergency2.setSelected(false);
         this.emergency3.setSelected(false);
         this.emergency4.setSelected(false);
+        this.Emergency_value.setText("0");
 
         /* Apelari de metode pentru initializare */
-        unHighlight(0);
+        highlight(0);
         unHighlight(1);
         unHighlight(2);
         unHighlight(3);
@@ -142,7 +152,45 @@ public class MainPageController extends MainPageControllerVariables implements I
     public void emergency(ActionEvent event) {
         CheckBox chk = (CheckBox) event.getSource();
         if (chk.isSelected() && semaforEmergency == -1) {
-            //!! TREBUIE SA ADAUG UN LABEL CA SA VAD UNDE AM EMERGENCY
+            // primesc un semnal de emergency si pun pe disabled restul "butoanelor" de emergency
+
+            this.index_semafor_value.setText(chk.getId());
+            unHighlight(index);
+            semaforEmergency = Integer.parseInt(chk.getId());
+            semafoareImages[index].setRosu();
+            this.Emergency_value.setText(semaforEmergency != -1 ? String.valueOf(semaforEmergency) : "0");
+
+            // trec la semaforul cu emergency
+            index = semaforEmergency - 1;
+            semafoareImages[index].setVerde();
+            highlight(index);
+
+            // dau disable la butoane
+            disableOtherEmergencyFlags(index);
+            next_state_button.setDisable(true);
+        } else if (!chk.isSelected()) {
+            // am deselectat urgenta, deci revin la normal
+            semaforEmergency = -1;
+            this.Emergency_value.setText(semaforEmergency != -1 ? String.valueOf(semaforEmergency) : "0");
+            enableAllEmergencyFlags();
+            next_state_button.setDisable(false);
+
+            semafoareImages[index].setRosu();
+            //! CE FACEM CU COUNTERELE???????????????????????????????????????????????????????????????????????????????
+        }
+    }
+
+    private void disableOtherEmergencyFlags(int index) {
+        for (int i = 0; i < 4; i++) {
+            if (index != i) {
+                emergencies[i].setDisable(true);
+            }
+        }
+    }
+
+    private void enableAllEmergencyFlags() {
+        for (int i = 0; i < 4; i++) {
+            emergencies[i].setDisable(false);
         }
     }
 }

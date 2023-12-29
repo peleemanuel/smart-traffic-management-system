@@ -133,6 +133,8 @@ public abstract class MainPageControllerVariables {
     protected Label Col_coef_3_value;
     @FXML
     protected Label Col_coef_4_value;
+    @FXML
+    protected Label Emergency_value;
     /* Sfarsit LABEL PANOU LATERAL INFORMATII*/
 }
 

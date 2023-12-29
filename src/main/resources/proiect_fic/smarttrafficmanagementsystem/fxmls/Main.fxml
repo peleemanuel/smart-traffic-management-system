@@ -137,22 +137,22 @@
             <Font size="15.0" />
         </font>
     </Button>
-    <Label fx:id="Tverde_display" layoutX="887.0" layoutY="317.0" text="Tverde:">
+    <Label fx:id="Tverde_display" layoutX="889.0" layoutY="265.0" text="Tverde:">
         <font>
             <Font size="18.0" />
         </font>
     </Label>
-    <Label fx:id="Tverde_value" layoutX="951.0" layoutY="317.0" text="Label">
+    <Label fx:id="Tverde_value" layoutX="953.0" layoutY="265.0" text="Label">
         <font>
             <Font size="18.0" />
         </font>
     </Label>
-    <Label fx:id="Coldstart_display" layoutX="887.0" layoutY="297.0" text="Coldstart:">
+    <Label fx:id="Coldstart_display" layoutX="889.0" layoutY="245.0" text="Coldstart:">
         <font>
             <Font size="18.0" />
         </font>
     </Label>
-    <Label fx:id="Coldstart_value" layoutX="972.0" layoutY="297.0" text="true/false">
+    <Label fx:id="Coldstart_value" layoutX="974.0" layoutY="245.0" text="true/false">
         <font>
             <Font size="18.0" />
         </font>
@@ -247,4 +247,14 @@
             <Font size="15.0" />
         </font>
     </Label>
+   <Label fx:id="Emergency_display" layoutX="889.0" layoutY="285.0" text="Emergency:">
+      <font>
+         <Font size="18.0" />
+      </font>
+   </Label>
+   <Label fx:id="Emergency_value" alignment="CENTER" layoutX="986.0" layoutY="285.0" prefHeight="27.0" prefWidth="25.0" text="0">
+      <font>
+         <Font size="18.0" />
+      </font>
+   </Label>
 </AnchorPane>
