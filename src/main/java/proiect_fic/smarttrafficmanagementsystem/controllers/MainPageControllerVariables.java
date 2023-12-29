@@ -101,7 +101,7 @@ public abstract class MainPageControllerVariables {
     protected CheckBox emergency4;
     /* Sfarsit checkbox emergency */
 
-    /**********
+    /***********
      * BUTOANE *
      ***********/
     @FXML
@@ -134,6 +134,4 @@ public abstract class MainPageControllerVariables {
     @FXML
     protected Label Col_coef_4_value;
     /* Sfarsit LABEL PANOU LATERAL INFORMATII*/
-
-
 }
