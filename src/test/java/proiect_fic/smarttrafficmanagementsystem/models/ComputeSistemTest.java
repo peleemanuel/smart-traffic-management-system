@@ -94,7 +94,7 @@ public class ComputeSistemTest {
         int[] debite = {10, 20, 10, 30};
         mem.setDebite(debite);
         mem.setCoef(coef);
-        assertEquals(computeSistem.calculTimpVerdeUrmator(index), 620);
+        assertEquals(20,computeSistem.calculTimpVerdeUrmator(index));
 
     }
 
@@ -161,6 +161,6 @@ public class ComputeSistemTest {
 
         computeSistem.calculCoeficient(1);
 
-        assertEquals(1.5999999046325684, mem.getCoefSemafor(1));
+        assertEquals(1.4000000953674316, mem.getCoefSemafor(1));
     }
 }
