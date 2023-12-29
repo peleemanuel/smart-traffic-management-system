@@ -135,3 +135,37 @@ public abstract class MainPageControllerVariables {
     protected Label Col_coef_4_value;
     /* Sfarsit LABEL PANOU LATERAL INFORMATII*/
 }
+
+class SemaforImages {
+    private ImageView[] culori = new ImageView[3];
+
+    public SemaforImages(ImageView rosu, ImageView galben, ImageView verde) {
+        culori[0] = rosu;
+        culori[1] = galben;
+        culori[2] = verde;
+    }
+
+    public void setRosu() {
+        culori[0].setVisible(true);
+        culori[1].setVisible(false);
+        culori[2].setVisible(false);
+    }
+
+    public void setGalben() {
+        culori[0].setVisible(false);
+        culori[1].setVisible(true);
+        culori[2].setVisible(false);
+    }
+
+    public void setVerde() {
+        culori[0].setVisible(false);
+        culori[1].setVisible(false);
+        culori[2].setVisible(true);
+    }
+
+    public void setSemafor(ImageView rosu, ImageView galben, ImageView verde) {
+        culori[0] = rosu;
+        culori[1] = galben;
+        culori[2] = verde;
+    }
+}
