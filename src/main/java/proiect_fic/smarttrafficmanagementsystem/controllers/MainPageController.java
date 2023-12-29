@@ -1,7 +1,10 @@
 package proiect_fic.smarttrafficmanagementsystem.controllers;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
@@ -15,6 +18,9 @@ import java.util.ResourceBundle;
 
 public class MainPageController extends MainPageControllerVariables implements Initializable {
     private boolean isEmergency;
+    private boolean coldStart;
+    private int semaforEmergency = -1;
+
     private final SemaforImages[] semafoareImages = new SemaforImages[4];
     private int index;
 
@@ -23,15 +29,11 @@ public class MainPageController extends MainPageControllerVariables implements I
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //if (semafoareImages[0] == null)
         semafoareImages[0] = new SemaforImages(rosu1, galben1, verde1);
-        //if (semafoareImages[1] == null)
         semafoareImages[1] = new SemaforImages(rosu2, galben2, verde2);
-        //if (semafoareImages[2] == null)
         semafoareImages[2] = new SemaforImages(rosu3, galben3, verde3);
-        //if (semafoareImages[3] == null)
         semafoareImages[3] = new SemaforImages(rosu4, galben4, verde4);
-
+        updateColdStart(true);
         init();
     }
 
@@ -60,7 +62,6 @@ public class MainPageController extends MainPageControllerVariables implements I
 
         this.index_semafor_value.setText(String.valueOf(index + 1));
         this.Tverde_value.setText("30");
-        this.Coldstart_value.setText("true");
         this.Col_debite_1_value.setText("0");
         this.Col_debite_2_value.setText("0");
         this.Col_debite_3_value.setText("0");
@@ -69,6 +70,11 @@ public class MainPageController extends MainPageControllerVariables implements I
         this.Col_coef_2_value.setText(String.valueOf(Memorie.getKINIT()));
         this.Col_coef_3_value.setText(String.valueOf(Memorie.getKINIT()));
         this.Col_coef_4_value.setText(String.valueOf(Memorie.getKINIT()));
+
+        this.emergency1.setSelected(false);
+        this.emergency2.setSelected(false);
+        this.emergency3.setSelected(false);
+        this.emergency4.setSelected(false);
 
         /* Apelari de metode pentru initializare */
         unHighlight(0);
@@ -79,6 +85,7 @@ public class MainPageController extends MainPageControllerVariables implements I
         semafoareImages[1].setRosu();
         semafoareImages[2].setRosu();
         semafoareImages[3].setRosu();
+        updateColdStart(true);
     }
 
     private void highlight(int index) {
@@ -101,9 +108,13 @@ public class MainPageController extends MainPageControllerVariables implements I
     }
 
     private void incrementIndex() {
-        index = (index + 1) % 4;
+        if (index == 3) {
+            index = 0;
+            updateColdStart(false);
+        } else {
+            index++;
+        }
         index_semafor_value.setText(String.valueOf(index + 1));
-        System.out.println(index);
     }
 
     private int nextIndex() {
@@ -120,5 +131,18 @@ public class MainPageController extends MainPageControllerVariables implements I
 
     private void setSemaforVerdeIndex(int index) {
         semafoareImages[index].setVerde();
+    }
+
+    private void updateColdStart(boolean state) {
+        coldStart = state;
+        Coldstart_value.setText(String.valueOf(coldStart));
+    }
+
+    @FXML
+    public void emergency(ActionEvent event) {
+        CheckBox chk = (CheckBox) event.getSource();
+        if (chk.isSelected() && semaforEmergency == -1) {
+            //!! TREBUIE SA ADAUG UN LABEL CA SA VAD UNDE AM EMERGENCY
+        }
     }
 }
