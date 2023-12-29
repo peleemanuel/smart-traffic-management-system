@@ -6,7 +6,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import proiect_fic.smarttrafficmanagementsystem.models.Memorie;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -14,7 +13,7 @@ import java.util.Objects;
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        
+
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("fxmls/Main.fxml")));
             Image icon = new Image("file:src/main/resources/proiect_fic/smarttrafficmanagementsystem/icons/semafor_verde.png");
