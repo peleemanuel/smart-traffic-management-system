@@ -2,8 +2,10 @@ package proiect_fic.smarttrafficmanagementsystem.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.control.CheckBox;
+import proiect_fic.smarttrafficmanagementsystem.models.Semafor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -261,5 +263,19 @@ class SemaforImages {
         culori[0].setVisible(false);
         culori[1].setVisible(false);
         culori[2].setVisible(true);
+    }
+}
+
+class Semafor_complet {
+    Semafor semafor_date;
+    private ImageView rosu;
+    private ImageView galben;
+    private ImageView verde;
+
+    public Semafor_complet(ImageView rosu, ImageView galben, ImageView verde, Semafor semafor) {
+        this.rosu = rosu;
+        this.galben = galben;
+        this.verde = verde;
+        this.semafor_date = semafor;
     }
 }
