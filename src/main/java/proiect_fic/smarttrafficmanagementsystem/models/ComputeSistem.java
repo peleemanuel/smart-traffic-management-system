@@ -195,13 +195,7 @@ public int sumaDebite(){
             }
 
         }
-        //valoarea absoluta a diferentei
-        int diff;
-        if(diffFlag1>diffFlag2)
-            diff=diffFlag1-diffFlag2;
-        else
-            diff=diffFlag2-diffFlag1;
-        return diff; //practic daca avem flagurile egale aceasta diferenta trebuie sa fie o
+        return diffFlag1-diffFlag2; //practic daca avem flagurile egale aceasta diferenta trebuie sa fie o
     }
 
     //calculam coeficientul de importanta dupa formula
