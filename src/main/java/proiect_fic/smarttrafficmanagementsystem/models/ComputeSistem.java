@@ -124,6 +124,7 @@ public int sumaDebite(){
     //aceasta functie are ca parametru index-ul semaforului pt care calculez timpul
     //Tverde(i+1) = Tmin + k*(Debit(i+1)/Sum(Debit(i+2,..)) * (Tmax-Tmin)
     public int calculTimpVerdeUrmator(int index) {
+        if(sumaDebite!=0) //aceasta conditie e doar ca sa nu mai avem erori
         timpVerde = (int) (Memorie.getTMIN() + mem.getCoefSemafor(index) *( mem.getDebitSemfor(index)/sumaDebite()) * (Memorie.getTMAX() - Memorie.getTMIN())); //! debit(index)/ suma_debite
         return timpVerde;
     }
