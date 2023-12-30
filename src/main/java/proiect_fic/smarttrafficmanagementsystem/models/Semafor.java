@@ -56,7 +56,7 @@ public class Semafor {
         }
     }
 
-    //punem pe flase toate variabilele contori
+    //punem pe false toate variabilele contori
     public void disableContori() {
         for (ContorSenzor contori : this.contori) {
             contori.schimbaStare(false);
@@ -71,5 +71,15 @@ public class Semafor {
         }
         return contor;
     }
+
+    private void disableOtherCounter(int index) {
+        contori[index].schimbaStare(true);
+        for (int i = 0; i < 3; i++) {
+            if (i != index)
+                contori[i].schimbaStare(false);
+
+        }
+    }
+
 }
 

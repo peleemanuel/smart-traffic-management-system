@@ -370,6 +370,7 @@ public class MainPageController extends MainPageControllerVariables implements I
         }
     }
 
+    //asta se gaseste in Semafor
     private void disableOtherCounter(int index) {
         setCounterEnable(index, true);
         setCounterEnable(nextIndex(index), false);
@@ -399,6 +400,7 @@ public class MainPageController extends MainPageControllerVariables implements I
         System.out.println(aux);
         return aux;
     }
+
 
     private void resetCounter(int index) {
         switch (index) {
@@ -440,10 +442,12 @@ public class MainPageController extends MainPageControllerVariables implements I
         Col_coefs[index].setText(String.valueOf(value));
     }
 
+    //in ComputeSistem
     private float getFlagDiff(int who, int what) {
         return (float) 0.1F * (checkboxesSemafors[who].getFlags() - checkboxesSemafors[what].getFlags());
     }
 
+    //nu mai ai nevoie ca e deja in calculCoeficient() in ComputeSistem
     private float getAllFlagsDiff(int index) {
         System.out.println(index);
         System.out.println(nextIndex(index));

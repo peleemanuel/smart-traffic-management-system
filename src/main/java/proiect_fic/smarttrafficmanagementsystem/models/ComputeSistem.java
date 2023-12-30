@@ -8,6 +8,7 @@ public class ComputeSistem {
     private int index;
     private int sumaDebite;
     private boolean coldstart;
+    private EmergencySenzor[] emergencies=new EmergencySenzor[4]; //fiecare set de benzi din interesectie care un emergencysezor reprezentat ca un checkbox
 
     // constructor
     public ComputeSistem(Semafor[] semafoare, Memorie mem, int timpVerde, int timpGalben, int index, int sumaDebite, boolean coldstart) {
@@ -62,7 +63,7 @@ public class ComputeSistem {
     public void setSumaDebite(int sumaDebite) {
         this.sumaDebite = sumaDebite;
     }
-
+//*********** se foloseste in loc de updateColdtart()
     public boolean getColdstartStatus() {
         return coldstart;
     }
@@ -210,4 +211,22 @@ public int sumaDebite(){
         }
         mem.setCoefSemafor(index, rez);
     }
+
+
+    public void incrementIndex() {
+        if (index == 3) {
+            index = 0;
+            coldstart=false;
+        } else {
+            index++;
+        }
+    }
+
+    //calculeaza indexul urmator
+    private int nextIndex(int index) {
+        return (index + 1) % 4;
+    }
+
+
+
 }
