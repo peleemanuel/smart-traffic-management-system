@@ -1,15 +1,14 @@
 package proiect_fic.smarttrafficmanagementsystem.controllers;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import proiect_fic.smarttrafficmanagementsystem.models.Memorie;
 
@@ -17,7 +16,11 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MainPageController extends MainPageControllerVariables implements Initializable {
-    private boolean isEmergency;
+
+    private int value;
+    private int[] debite = new int[4];
+    private DebitSpinner[] debitSpinners = new DebitSpinner[4];
+    private FazaSemafor fazaSemafor;
     private boolean coldStart;
     private int semaforEmergency = -1;
 
@@ -44,6 +47,43 @@ public class MainPageController extends MainPageControllerVariables implements I
         emergencies[1] = emergency2;
         emergencies[2] = emergency3;
         emergencies[3] = emergency4;
+
+        debitSpinners[0] = new DebitSpinner(counter11, counter12, counter13);
+        debitSpinners[1] = new DebitSpinner(counter21, counter22, counter23);
+        debitSpinners[2] = new DebitSpinner(counter31, counter32, counter33);
+        debitSpinners[3] = new DebitSpinner(counter41, counter42, counter43);
+
+        SpinnerValueFactory<Integer> valueFactory11 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE, 0);
+        SpinnerValueFactory<Integer> valueFactory12 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE, 0);
+        SpinnerValueFactory<Integer> valueFactory13 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE, 0);
+        SpinnerValueFactory<Integer> valueFactory21 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE, 0);
+        SpinnerValueFactory<Integer> valueFactory22 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE, 0);
+        SpinnerValueFactory<Integer> valueFactory23 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE, 0);
+        SpinnerValueFactory<Integer> valueFactory31 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE, 0);
+        SpinnerValueFactory<Integer> valueFactory32 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE, 0);
+        SpinnerValueFactory<Integer> valueFactory33 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE, 0);
+        SpinnerValueFactory<Integer> valueFactory41 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE, 0);
+        SpinnerValueFactory<Integer> valueFactory42 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE, 0);
+        SpinnerValueFactory<Integer> valueFactory43 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE, 0);
+
+        counter11.setValueFactory(valueFactory11);
+        counter12.setValueFactory(valueFactory12);
+        counter13.setValueFactory(valueFactory13);
+        counter21.setValueFactory(valueFactory21);
+        counter22.setValueFactory(valueFactory22);
+        counter23.setValueFactory(valueFactory23);
+        counter31.setValueFactory(valueFactory31);
+        counter32.setValueFactory(valueFactory32);
+        counter33.setValueFactory(valueFactory33);
+        counter41.setValueFactory(valueFactory41);
+        counter42.setValueFactory(valueFactory42);
+        counter43.setValueFactory(valueFactory43);
+
+        //test_button.setOnAction(e -> {
+        //    value = counter43.getValue();
+        //    test_label.setText(String.valueOf(value));
+        //});
+
         init();
     }
 
@@ -52,9 +92,13 @@ public class MainPageController extends MainPageControllerVariables implements I
         // Aici initializez valorile unde consider ca este necesar.
 
         /* Variabile locale */
-        isEmergency = false;
+        fazaSemafor = FazaSemafor.VERDE;
         index = 0;
         semaforEmergency = -1;
+        debite[0] = 0;
+        debite[1] = 0;
+        debite[2] = 0;
+        debite[3] = 0;
 
         /* FXML */
         // Initial semafoarele sunt rosii (pun pe invizibil semafoarele galben si verde)
@@ -110,11 +154,66 @@ public class MainPageController extends MainPageControllerVariables implements I
 
     @FXML
     public void nextState() {
-        unHighlight(index);
-        semafoareImages[index].setRosu();
-        incrementIndex();
-        highlight(index);
-        semafoareImages[index].setVerde();
+        // nu mai am highlight pe semaforul curent, pun semaforul curent pe rosu
+        //unHighlight(index);
+        //semafoareImages[index].setRosu();
+        //
+        //// trec la urmatorul index
+        //incrementIndex();
+        //
+        //// dau highlight si pun pe verde la semaforul la care am ajuns
+        //highlight(index);
+        //semafoareImages[index].setVerde();
+
+        switch (fazaSemafor) {
+            case VERDE:
+                //daca suntem pe verde, trec pe galben
+
+                // eu sunt pe index, nu am motiv sa trec la urmatorul index
+                // raman cu highlight unde sunt
+                semafoareImages[index].setGalben();
+                fazaSemafor = FazaSemafor.GALBEN;
+                break;
+            case GALBEN:
+                // cand sunt pe galben, fac calculele si fac cumva sa reprezint ca in spate se fac calcule
+                // cand termin calculele trec in faza de rosu
+
+                // adaugam un delay pentru fiecare calcul de formula si afisare in panoul de informatii
+                if (coldStart) {
+                    Tverde_value.setText("30");
+                } else {
+                    // trebuie sa calculez cu formula si sa schimb timpul de verde
+                }
+
+                // dupa ce calculez bine mersi, trec in faza de rosu
+                fazaSemafor = FazaSemafor.ROSU;
+                semafoareImages[index].setRosu();
+                break;
+            case ROSU:
+                // cand sunt in rosu trebuie sa verific daca trec la verde sau la galben_intermitent
+                if (getDebite() == 0) {
+                    // galben intermitent => toate semafoarele sunt galbene, scot highlight
+                    semafoareImages[0].setGalben();
+                    semafoareImages[1].setGalben();
+                    semafoareImages[2].setGalben();
+                    semafoareImages[3].setGalben();
+
+                    unHighlight(index);
+                    fazaSemafor = FazaSemafor.GALBEN_INTERMITENT;
+                } else {
+                    fazaSemafor = FazaSemafor.VERDE;
+                    //creste index??
+                }
+                break;
+            case GALBEN_INTERMITENT:
+                //cand sunt in galben intermitent verific daca stau pe loc sau trec la verde
+                if (getDebite() >= 10) {
+                    // ies din faza de galben_intermitent
+                    init();
+                }
+                break;
+        }
+
     }
 
     private void incrementIndex() {
@@ -154,11 +253,12 @@ public class MainPageController extends MainPageControllerVariables implements I
         if (chk.isSelected() && semaforEmergency == -1) {
             // primesc un semnal de emergency si pun pe disabled restul "butoanelor" de emergency
 
-            this.index_semafor_value.setText(chk.getId());
-            unHighlight(index);
             semaforEmergency = Integer.parseInt(chk.getId());
+
+            unHighlight(index);
             semafoareImages[index].setRosu();
-            this.Emergency_value.setText(semaforEmergency != -1 ? String.valueOf(semaforEmergency) : "0");
+            index_semafor_value.setText(chk.getId());
+            Emergency_value.setText(semaforEmergency != -1 ? String.valueOf(semaforEmergency) : "0");
 
             // trec la semaforul cu emergency
             index = semaforEmergency - 1;
@@ -170,8 +270,11 @@ public class MainPageController extends MainPageControllerVariables implements I
             next_state_button.setDisable(true);
         } else if (!chk.isSelected()) {
             // am deselectat urgenta, deci revin la normal
+
             semaforEmergency = -1;
-            this.Emergency_value.setText(semaforEmergency != -1 ? String.valueOf(semaforEmergency) : "0");
+
+            Emergency_value.setText(semaforEmergency != -1 ? String.valueOf(semaforEmergency) : "0");
+
             enableAllEmergencyFlags();
             next_state_button.setDisable(false);
 
@@ -193,4 +296,32 @@ public class MainPageController extends MainPageControllerVariables implements I
             emergencies[i].setDisable(false);
         }
     }
+
+    private int getDebite() {
+        int aux = 0;
+        for (int i = 0; i < 4; i++) {
+            aux += debitSpinners[i].getDebit();
+        }
+        System.out.println(aux);
+        return aux;
+    }
+
+
+    //public void getValueSpinner() {
+    //    SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE);
+    //    valueFactory.setValue(0);
+    //    test_spinner.setValueFactory(valueFactory);
+    //
+    //    value = test_spinner.getValue();
+    //    System.out.println(value);
+    //    //test_label.setText(String.valueOf(value));
+    //
+    //    test_spinner.valueProperty().addListener(new ChangeListener<Integer>() {
+    //        @Override
+    //        public void changed(ObservableValue<? extends Integer> observable, Integer oldValue, Integer newValue) {
+    //            value = test_spinner.getValue();
+    //            test_label.setText(String.valueOf(value));
+    //        }
+    //    });
+    //}
 }

@@ -247,14 +247,14 @@
             <Font size="15.0" />
         </font>
     </Label>
-   <Label fx:id="Emergency_display" layoutX="889.0" layoutY="285.0" text="Emergency:">
-      <font>
-         <Font size="18.0" />
-      </font>
-   </Label>
-   <Label fx:id="Emergency_value" alignment="CENTER" layoutX="986.0" layoutY="285.0" prefHeight="27.0" prefWidth="25.0" text="0">
-      <font>
-         <Font size="18.0" />
-      </font>
-   </Label>
+    <Label fx:id="Emergency_display" layoutX="889.0" layoutY="285.0" text="Emergency:">
+        <font>
+            <Font size="18.0" />
+        </font>
+    </Label>
+    <Label fx:id="Emergency_value" alignment="CENTER" layoutX="986.0" layoutY="285.0" prefHeight="27.0" prefWidth="25.0" text="0">
+        <font>
+            <Font size="18.0" />
+        </font>
+    </Label>
 </AnchorPane>

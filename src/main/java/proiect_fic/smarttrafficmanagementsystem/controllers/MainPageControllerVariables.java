@@ -7,6 +7,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 import javafx.scene.image.ImageView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class MainPageControllerVariables {
     /********************************
      * IMAGINI SEMAFOARE INTERSECITE*
@@ -136,6 +139,21 @@ public abstract class MainPageControllerVariables {
     @FXML
     protected Label Emergency_value;
     /* Sfarsit LABEL PANOU LATERAL INFORMATII*/
+
+}
+
+class DebitSpinner {
+    private final List<Spinner<Integer>> spinners = new ArrayList<>(3);
+
+    public DebitSpinner(Spinner<Integer> spinner1, Spinner<Integer> spinner2, Spinner<Integer> spinner3) {
+        spinners.add(spinner1);
+        spinners.add(spinner2);
+        spinners.add(spinner3);
+    }
+
+    public int getDebit() {
+        return spinners.get(0).getValue() + spinners.get(1).getValue() + spinners.get(2).getValue();
+    }
 }
 
 class SemaforImages {
@@ -165,9 +183,9 @@ class SemaforImages {
         culori[2].setVisible(true);
     }
 
-    public void setSemafor(ImageView rosu, ImageView galben, ImageView verde) {
-        culori[0] = rosu;
-        culori[1] = galben;
-        culori[2] = verde;
-    }
+    //public void setSemafor(ImageView rosu, ImageView galben, ImageView verde) {
+    //    culori[0] = rosu;
+    //    culori[1] = galben;
+    //    culori[2] = verde;
+    //}
 }
