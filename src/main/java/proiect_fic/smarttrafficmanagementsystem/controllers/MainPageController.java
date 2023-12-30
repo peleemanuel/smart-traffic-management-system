@@ -106,6 +106,26 @@ public class MainPageController extends MainPageControllerVariables implements I
     }
 
     @FXML
+    public void error() {
+        semafoareImages[0].setGalben();
+        semafoareImages[1].setGalben();
+        semafoareImages[2].setGalben();
+        semafoareImages[3].setGalben();
+        unHighlight(index);
+        debitSpinners[index].setEnabled(false);
+        emergencies[0].setDisable(true);
+        emergencies[1].setDisable(true);
+        emergencies[2].setDisable(true);
+        emergencies[3].setDisable(true);
+
+        fazaSemafor = FazaSemafor.ERROR;
+        actualizareStareCurenta();
+
+        next_state_button.setDisable(true);
+        error_button.setDisable(true);
+    }
+
+    @FXML
     public void init() {
         // Aici initializez valorile unde consider ca este necesar.
 
@@ -151,6 +171,7 @@ public class MainPageController extends MainPageControllerVariables implements I
 
         Tverde_display.setText("Tverde:");
 
+        error_button.setDisable(false);
         /* Apelari de metode pentru initializare */
         highlight(0);
         unHighlight(1);
@@ -185,6 +206,11 @@ public class MainPageController extends MainPageControllerVariables implements I
         actualizareStareCurenta();
 
         enableAllEmergencyFlags();
+
+        checkboxesSemafors[0].setDeselected();
+        checkboxesSemafors[1].setDeselected();
+        checkboxesSemafors[2].setDeselected();
+        checkboxesSemafors[3].setDeselected();
     }
 
     private void highlight(int index) {
@@ -435,4 +461,6 @@ public class MainPageController extends MainPageControllerVariables implements I
     private void setCounterEnable(int index, boolean bool) {
         debitSpinners[index].setEnabled(bool);
     }
+
+
 }

@@ -109,6 +109,8 @@ public abstract class MainPageControllerVariables {
     protected Button next_state_button;
     @FXML
     protected Button reset_button;
+    @FXML
+    protected Button error_button;
     /* Sfarsit butoane */
 
     /***********************************
