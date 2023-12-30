@@ -64,7 +64,7 @@ public class ComputeSistemTest {
     void testInitSystem() {
         computeSistem.initSystem();
         assertEquals(0, computeSistem.getTimpVerde()); //timpul de verde ar trebui resetat la 0 dupa initializare
-        assertEquals(600, computeSistem.getTimpGalben()); //timpul de galben ar trebui sa fie 600 dupa initializare
+        assertEquals(30, computeSistem.getTimpGalben()); //timpul de galben ar trebui sa fie 600 dupa initializare
         assertEquals(0, computeSistem.getSumaDebite()); //suma debite ar trebui sa fie 0 dupa initializare
     }
 

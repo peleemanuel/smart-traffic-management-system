@@ -1,7 +1,6 @@
 package proiect_fic.smarttrafficmanagementsystem.controllers;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -19,7 +18,9 @@ public class MainPageController extends MainPageControllerVariables implements I
 
     private int value;
     private int[] debite = new int[4];
+    private float[] coefs = new float[4];
     private DebitSpinner[] debitSpinners = new DebitSpinner[4];
+    private CheckboxesSemafor[] checkboxesSemafors = new CheckboxesSemafor[4];
     private FazaSemafor fazaSemafor;
     private boolean coldStart;
     private int semaforEmergency = -1;
@@ -28,6 +29,8 @@ public class MainPageController extends MainPageControllerVariables implements I
     private int index;
 
     private final Label[] semafoareLabels = new Label[4];
+    private final Label[] Col_debite = new Label[4];
+    private final Label[] Col_coefs = new Label[4];
     private final CheckBox[] emergencies = new CheckBox[4];
 
 
@@ -37,6 +40,16 @@ public class MainPageController extends MainPageControllerVariables implements I
         semafoareImages[1] = new SemaforImages(rosu2, galben2, verde2);
         semafoareImages[2] = new SemaforImages(rosu3, galben3, verde3);
         semafoareImages[3] = new SemaforImages(rosu4, galben4, verde4);
+
+        Col_debite[0] = Col_debite_1_value;
+        Col_debite[1] = Col_debite_2_value;
+        Col_debite[2] = Col_debite_3_value;
+        Col_debite[3] = Col_debite_4_value;
+
+        Col_coefs[0] = Col_coef_1_value;
+        Col_coefs[1] = Col_coef_2_value;
+        Col_coefs[2] = Col_coef_3_value;
+        Col_coefs[3] = Col_coef_4_value;
 
         semafoareLabels[0] = semafor1;
         semafoareLabels[1] = semafor2;
@@ -48,23 +61,18 @@ public class MainPageController extends MainPageControllerVariables implements I
         emergencies[2] = emergency3;
         emergencies[3] = emergency4;
 
-        debitSpinners[0] = new DebitSpinner(counter11, counter12, counter13);
-        debitSpinners[1] = new DebitSpinner(counter21, counter22, counter23);
-        debitSpinners[2] = new DebitSpinner(counter31, counter32, counter33);
-        debitSpinners[3] = new DebitSpinner(counter41, counter42, counter43);
-
-        SpinnerValueFactory<Integer> valueFactory11 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE, 0);
-        SpinnerValueFactory<Integer> valueFactory12 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE, 0);
-        SpinnerValueFactory<Integer> valueFactory13 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE, 0);
-        SpinnerValueFactory<Integer> valueFactory21 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE, 0);
-        SpinnerValueFactory<Integer> valueFactory22 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE, 0);
-        SpinnerValueFactory<Integer> valueFactory23 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE, 0);
-        SpinnerValueFactory<Integer> valueFactory31 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE, 0);
-        SpinnerValueFactory<Integer> valueFactory32 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE, 0);
-        SpinnerValueFactory<Integer> valueFactory33 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE, 0);
-        SpinnerValueFactory<Integer> valueFactory41 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE, 0);
-        SpinnerValueFactory<Integer> valueFactory42 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE, 0);
-        SpinnerValueFactory<Integer> valueFactory43 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE, 0);
+        valueFactory11 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE, 0);
+        valueFactory12 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE, 0);
+        valueFactory13 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE, 0);
+        valueFactory21 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE, 0);
+        valueFactory22 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE, 0);
+        valueFactory33 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE, 0);
+        valueFactory23 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE, 0);
+        valueFactory31 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE, 0);
+        valueFactory32 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE, 0);
+        valueFactory41 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE, 0);
+        valueFactory42 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE, 0);
+        valueFactory43 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE, 0);
 
         counter11.setValueFactory(valueFactory11);
         counter12.setValueFactory(valueFactory12);
@@ -78,6 +86,16 @@ public class MainPageController extends MainPageControllerVariables implements I
         counter41.setValueFactory(valueFactory41);
         counter42.setValueFactory(valueFactory42);
         counter43.setValueFactory(valueFactory43);
+
+        debitSpinners[0] = new DebitSpinner(counter11, counter12, counter13);
+        debitSpinners[1] = new DebitSpinner(counter21, counter22, counter23);
+        debitSpinners[2] = new DebitSpinner(counter31, counter32, counter33);
+        debitSpinners[3] = new DebitSpinner(counter41, counter42, counter43);
+
+        checkboxesSemafors[0] = new CheckboxesSemafor(emergency_flag11, emergency_flag12, emergency_flag13);
+        checkboxesSemafors[1] = new CheckboxesSemafor(emergency_flag21, emergency_flag22, emergency_flag23);
+        checkboxesSemafors[2] = new CheckboxesSemafor(emergency_flag31, emergency_flag32, emergency_flag33);
+        checkboxesSemafors[3] = new CheckboxesSemafor(emergency_flag41, emergency_flag42, emergency_flag43);
 
         //test_button.setOnAction(e -> {
         //    value = counter43.getValue();
@@ -100,6 +118,11 @@ public class MainPageController extends MainPageControllerVariables implements I
         debite[2] = 0;
         debite[3] = 0;
 
+        coefs[0] = 0.0F;
+        coefs[1] = 0.0F;
+        coefs[2] = 0.0F;
+        coefs[3] = 0.0F;
+
         /* FXML */
         // Initial semafoarele sunt rosii (pun pe invizibil semafoarele galben si verde)
         this.galben1.setVisible(false);
@@ -111,14 +134,10 @@ public class MainPageController extends MainPageControllerVariables implements I
         this.galben4.setVisible(false);
         this.verde4.setVisible(false);
         next_state_button.setDisable(false);
-        enableAllEmergencyFlags();
 
         this.index_semafor_value.setText(String.valueOf(index + 1));
         this.Tverde_value.setText("30");
-        this.Col_debite_1_value.setText("0");
-        this.Col_debite_2_value.setText("0");
-        this.Col_debite_3_value.setText("0");
-        this.Col_debite_4_value.setText("0");
+
         this.Col_coef_1_value.setText(String.valueOf(Memorie.getKINIT()));
         this.Col_coef_2_value.setText(String.valueOf(Memorie.getKINIT()));
         this.Col_coef_3_value.setText(String.valueOf(Memorie.getKINIT()));
@@ -130,6 +149,8 @@ public class MainPageController extends MainPageControllerVariables implements I
         this.emergency4.setSelected(false);
         this.Emergency_value.setText("0");
 
+        Tverde_display.setText("Tverde:");
+
         /* Apelari de metode pentru initializare */
         highlight(0);
         unHighlight(1);
@@ -140,6 +161,30 @@ public class MainPageController extends MainPageControllerVariables implements I
         semafoareImages[2].setRosu();
         semafoareImages[3].setRosu();
         updateColdStart(true);
+
+        resetCounter(0);
+        resetCounter(1);
+        resetCounter(2);
+        resetCounter(3);
+
+        setDebitCol(0, 0);
+        setDebitCol(1, 0);
+        setDebitCol(2, 0);
+        setDebitCol(3, 0);
+
+        setCoefCol(0, 1);
+        setCoefCol(1, 1);
+        setCoefCol(2, 1);
+        setCoefCol(3, 1);
+
+        checkboxesSemafors[0].setEnabled(true);
+        checkboxesSemafors[1].setEnabled(false);
+        checkboxesSemafors[2].setEnabled(false);
+        checkboxesSemafors[3].setEnabled(false);
+
+        actualizareStareCurenta();
+
+        enableAllEmergencyFlags();
     }
 
     private void highlight(int index) {
@@ -153,18 +198,7 @@ public class MainPageController extends MainPageControllerVariables implements I
     }
 
     @FXML
-    public void nextState() {
-        // nu mai am highlight pe semaforul curent, pun semaforul curent pe rosu
-        //unHighlight(index);
-        //semafoareImages[index].setRosu();
-        //
-        //// trec la urmatorul index
-        //incrementIndex();
-        //
-        //// dau highlight si pun pe verde la semaforul la care am ajuns
-        //highlight(index);
-        //semafoareImages[index].setVerde();
-
+    public void nextState() throws InterruptedException {
         switch (fazaSemafor) {
             case VERDE:
                 //daca suntem pe verde, trec pe galben
@@ -173,20 +207,41 @@ public class MainPageController extends MainPageControllerVariables implements I
                 // raman cu highlight unde sunt
                 semafoareImages[index].setGalben();
                 fazaSemafor = FazaSemafor.GALBEN;
+                actualizareStareCurenta();
                 break;
             case GALBEN:
+                //actualizareStareCurenta();
+                //semafoareImages[index].setGalben();
                 // cand sunt pe galben, fac calculele si fac cumva sa reprezint ca in spate se fac calcule
                 // cand termin calculele trec in faza de rosu
 
                 // adaugam un delay pentru fiecare calcul de formula si afisare in panoul de informatii
+                int timp;
                 if (coldStart) {
-                    Tverde_value.setText("30");
+                    timp = Memorie.getTMED();
                 } else {
-                    // trebuie sa calculez cu formula si sa schimb timpul de verde
+                    // trebuie sa calculez factorul de importanta
+                    float imp = (float) (Memorie.getKINIT() + getAllFlagsDiff(index));
+                    Col_coefs[nextIndex(index)].setText(String.valueOf(imp));
+                    setCoefCol(nextIndex(index), imp);
+
+                    coefs[nextIndex(index)] = imp;
+
+                    // trebuie sa calculez cu formula
+                    timp = formulaTimpVerde(index);
                 }
+                //Thread.sleep(1500);
+
+                // schimb timpul de verde
+                Tverde_value.setText(String.valueOf(timp));
+                setDebitCol(index, debitSpinners[index].getDebit());
+
 
                 // dupa ce calculez bine mersi, trec in faza de rosu
                 fazaSemafor = FazaSemafor.ROSU;
+                actualizareStareCurenta();
+                //Thread.sleep(1500);
+
                 semafoareImages[index].setRosu();
                 break;
             case ROSU:
@@ -198,11 +253,30 @@ public class MainPageController extends MainPageControllerVariables implements I
                     semafoareImages[2].setGalben();
                     semafoareImages[3].setGalben();
 
+                    Tverde_display.setText("Tgalben:");
+
                     unHighlight(index);
                     fazaSemafor = FazaSemafor.GALBEN_INTERMITENT;
+                    actualizareStareCurenta();
                 } else {
                     fazaSemafor = FazaSemafor.VERDE;
-                    //creste index??
+                    actualizareStareCurenta();
+                    // trebuie sa resetez counterele
+                    resetCounter(index);
+
+                    // deselectez checkboxurile
+                    checkboxesSemafors[index].setDeselected();
+
+                    // nu mai am highlight pe semaforul curent, pun semaforul curent pe rosu
+                    unHighlight(index);
+                    semafoareImages[index].setRosu();
+
+                    // trec la urmatorul index
+                    incrementIndex();
+
+                    // dau highlight si pun pe verde la semaforul la care am ajuns
+                    highlight(index);
+                    semafoareImages[index].setVerde();
                 }
                 break;
             case GALBEN_INTERMITENT:
@@ -226,7 +300,7 @@ public class MainPageController extends MainPageControllerVariables implements I
         index_semafor_value.setText(String.valueOf(index + 1));
     }
 
-    private int nextIndex() {
+    private int nextIndex(int index) {
         return (index + 1) % 4;
     }
 
@@ -306,22 +380,63 @@ public class MainPageController extends MainPageControllerVariables implements I
         return aux;
     }
 
+    private void resetCounter(int index) {
+        switch (index) {
+            case 0:
+                valueFactory11.setValue(0);
+                valueFactory12.setValue(0);
+                valueFactory13.setValue(0);
+                break;
 
-    //public void getValueSpinner() {
-    //    SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE);
-    //    valueFactory.setValue(0);
-    //    test_spinner.setValueFactory(valueFactory);
-    //
-    //    value = test_spinner.getValue();
-    //    System.out.println(value);
-    //    //test_label.setText(String.valueOf(value));
-    //
-    //    test_spinner.valueProperty().addListener(new ChangeListener<Integer>() {
-    //        @Override
-    //        public void changed(ObservableValue<? extends Integer> observable, Integer oldValue, Integer newValue) {
-    //            value = test_spinner.getValue();
-    //            test_label.setText(String.valueOf(value));
-    //        }
-    //    });
-    //}
+            case 1:
+                valueFactory21.setValue(0);
+                valueFactory22.setValue(0);
+                valueFactory23.setValue(0);
+                break;
+            case 2:
+                valueFactory31.setValue(0);
+                valueFactory32.setValue(0);
+                valueFactory33.setValue(0);
+                break;
+            case 3:
+                valueFactory41.setValue(0);
+                valueFactory42.setValue(0);
+                valueFactory43.setValue(0);
+                break;
+        }
+    }
+
+    private int formulaTimpVerde(int index) {
+        return (int) (10 + coefs[nextIndex(index)] * (debite[nextIndex(index)] / getDebite()) * 30);
+    }
+
+    private void setDebitCol(int index, int value) {
+        Col_debite[index].setText(String.valueOf(value));
+        debite[index] = value;
+    }
+
+
+    private void setCoefCol(int index, float value) {
+        Col_coefs[index].setText(String.valueOf(value));
+    }
+
+    private float getFlagDiff(int who, int what) {
+        return (float) 0.1F * (checkboxesSemafors[who].getFlags() - checkboxesSemafors[what].getFlags());
+    }
+
+    private int getFlags() {
+        int rez = 0;
+
+        return rez;
+    }
+
+    private float getAllFlagsDiff(int index) {
+        return getFlagDiff(index, nextIndex(index)) +
+                getFlagDiff(index, nextIndex(nextIndex(index))) +
+                getFlagDiff(index, nextIndex(nextIndex(nextIndex(index))));
+    }
+
+    private void actualizareStareCurenta() {
+        stare_curenta_value.setText(String.valueOf(fazaSemafor));
+    }
 }
