@@ -112,11 +112,18 @@ public class ComputeSistem {
         return coldstart;
     }
 
-
+public int sumaDebite(){
+        sumaDebite=0;
+        for(int i=0;i<4;i++)
+        {
+            sumaDebite=sumaDebite+mem.getDebitSemfor(i);
+        }
+        return sumaDebite;
+}
     //aceasta functie are ca parametru index-ul semaforului pt care calculez timpul
     //Tverde(i+1) = Tmin + k*(Debit(i+1)/Sum(Debit(i+2,..)) * (Tmax-Tmin)
     public int calculTimpVerdeUrmator(int index) {
-        timpVerde = (int) (Memorie.getTMIN() + mem.getCoefSemafor(index) * mem.getDebitSemfor(index) * (Memorie.getTMAX() - Memorie.getTMIN())); //! debit(index)/ suma_debite
+        timpVerde = (int) (Memorie.getTMIN() + mem.getCoefSemafor(index) *( mem.getDebitSemfor(index)/sumaDebite()) * (Memorie.getTMAX() - Memorie.getTMIN())); //! debit(index)/ suma_debite
         return timpVerde;
     }
 
@@ -176,16 +183,19 @@ public class ComputeSistem {
 
     //functia calculeaza pe baza a doi vectori de flaguri cate elemente difera
     //se foloseste pt a calcula coeficientul de importanta k
-    // ************** TREBUIE REFACUTA METODA
     protected int flagDiff(FlagSenzor[] flaguri1, FlagSenzor[] flaguri2) {
-        int diffFlag = 0; //variabila care retine cate flag-uri sunt diferite
+        int diffFlag1 = 0, diffFlag2=0; //variabila care retine cate flag-uri sunt diferite
         for (int i = 0; i < 3; i++) {
-            if (flaguri1[i] != flaguri2[i]) {
-                diffFlag++; //aceasta diferenta poate fi 0 1 2 sau 3
+            if (flaguri1[i].getStatus()==true)
+            {
+                diffFlag1++; //aceasta diferenta poate fi 0 1 2 sau 3
+            }
+                if(flaguri2[i].getStatus()==true) {
+                diffFlag2++; //aceasta diferenta poate fi 0 1 2 sau 3
             }
 
         }
-        return diffFlag;
+        return diffFlag1-diffFlag2; //practic daca avem flagurile egale aceasta diferenta trebuie sa fie o
     }
 
     //calculam coeficientul de importanta dupa formula
