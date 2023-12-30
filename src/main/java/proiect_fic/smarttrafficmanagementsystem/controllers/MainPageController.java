@@ -429,7 +429,10 @@ public class MainPageController extends MainPageControllerVariables implements I
     }
 
     private int formulaTimpVerde(int index) {
-        return (int) (10 + coefs[nextIndex(index)] * (debite[nextIndex(index)] / getDebite()) * 30);
+        int rez=(int) (10 + coefs[nextIndex(index)] * (debite[nextIndex(index)] / getDebite()) * 30);
+        if(rez>Memorie.getTMAX())
+            return Memorie.getTMAX();
+        return rez;
     }
 
     private void setDebitCol(int index, int value) {

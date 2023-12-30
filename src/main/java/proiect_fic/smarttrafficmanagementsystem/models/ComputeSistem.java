@@ -126,6 +126,8 @@ public int sumaDebite(){
     public int calculTimpVerdeUrmator(int index) {
         //if(sumaDebite!=0) //aceasta conditie e doar ca sa nu mai avem erori
         timpVerde = (int) (Memorie.getTMIN() + mem.getCoefSemafor(index) *( mem.getDebitSemfor(index)/sumaDebite()) * (Memorie.getTMAX() - Memorie.getTMIN())); //! debit(index)/ suma_debite
+       if(timpVerde>Memorie.getTMAX())
+           return Memorie.getTMAX();
         return timpVerde;
     }
 
