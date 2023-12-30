@@ -177,10 +177,10 @@ public class MainPageController extends MainPageControllerVariables implements I
         setCoefCol(2, 1);
         setCoefCol(3, 1);
 
-        checkboxesSemafors[0].setEnabled(true);
-        checkboxesSemafors[1].setEnabled(false);
-        checkboxesSemafors[2].setEnabled(false);
-        checkboxesSemafors[3].setEnabled(false);
+        setCounterEnable(0, true);
+        setCounterEnable(1, false);
+        setCounterEnable(2, false);
+        setCounterEnable(3, false);
 
         actualizareStareCurenta();
 
@@ -205,13 +205,13 @@ public class MainPageController extends MainPageControllerVariables implements I
 
                 // eu sunt pe index, nu am motiv sa trec la urmatorul index
                 // raman cu highlight unde sunt
+
                 semafoareImages[index].setGalben();
                 fazaSemafor = FazaSemafor.GALBEN;
+                debitSpinners[index].setEnabled(false);
                 actualizareStareCurenta();
                 break;
             case GALBEN:
-                //actualizareStareCurenta();
-                //semafoareImages[index].setGalben();
                 // cand sunt pe galben, fac calculele si fac cumva sa reprezint ca in spate se fac calcule
                 // cand termin calculele trec in faza de rosu
 
@@ -221,7 +221,7 @@ public class MainPageController extends MainPageControllerVariables implements I
                     timp = Memorie.getTMED();
                 } else {
                     // trebuie sa calculez factorul de importanta
-                    float imp = (float) (Memorie.getKINIT() + getAllFlagsDiff(index));
+                    float imp = (float) (Memorie.getKINIT() + getAllFlagsDiff(nextIndex(index)));
                     Col_coefs[nextIndex(index)].setText(String.valueOf(imp));
                     setCoefCol(nextIndex(index), imp);
 
@@ -230,17 +230,14 @@ public class MainPageController extends MainPageControllerVariables implements I
                     // trebuie sa calculez cu formula
                     timp = formulaTimpVerde(index);
                 }
-                //Thread.sleep(1500);
 
                 // schimb timpul de verde
                 Tverde_value.setText(String.valueOf(timp));
                 setDebitCol(index, debitSpinners[index].getDebit());
 
-
                 // dupa ce calculez bine mersi, trec in faza de rosu
                 fazaSemafor = FazaSemafor.ROSU;
                 actualizareStareCurenta();
-                //Thread.sleep(1500);
 
                 semafoareImages[index].setRosu();
                 break;
@@ -254,26 +251,25 @@ public class MainPageController extends MainPageControllerVariables implements I
                     semafoareImages[3].setGalben();
 
                     Tverde_display.setText("Tgalben:");
-
+                    Tverde_value.setText("120");
                     unHighlight(index);
                     fazaSemafor = FazaSemafor.GALBEN_INTERMITENT;
                     actualizareStareCurenta();
                 } else {
+                    // continui la verde
+
                     fazaSemafor = FazaSemafor.VERDE;
                     actualizareStareCurenta();
                     // trebuie sa resetez counterele
                     resetCounter(index);
 
-                    // deselectez checkboxurile
-                    checkboxesSemafors[index].setDeselected();
-
                     // nu mai am highlight pe semaforul curent, pun semaforul curent pe rosu
                     unHighlight(index);
                     semafoareImages[index].setRosu();
-
+                    setCounterEnable(index, false);
                     // trec la urmatorul index
                     incrementIndex();
-
+                    setCounterEnable(index, true);
                     // dau highlight si pun pe verde la semaforul la care am ajuns
                     highlight(index);
                     semafoareImages[index].setVerde();
@@ -304,18 +300,6 @@ public class MainPageController extends MainPageControllerVariables implements I
         return (index + 1) % 4;
     }
 
-    private void setSemaforRosuIndex(int index) {
-        semafoareImages[index].setRosu();
-    }
-
-    private void setSemaforGalbenIndex(int index) {
-        semafoareImages[index].setGalben();
-    }
-
-    private void setSemaforVerdeIndex(int index) {
-        semafoareImages[index].setVerde();
-    }
-
     private void updateColdStart(boolean state) {
         coldStart = state;
         Coldstart_value.setText(String.valueOf(coldStart));
@@ -326,7 +310,8 @@ public class MainPageController extends MainPageControllerVariables implements I
         CheckBox chk = (CheckBox) event.getSource();
         if (chk.isSelected() && semaforEmergency == -1) {
             // primesc un semnal de emergency si pun pe disabled restul "butoanelor" de emergency
-
+            fazaSemafor = FazaSemafor.EMERGENCY;
+            actualizareStareCurenta();
             semaforEmergency = Integer.parseInt(chk.getId());
 
             unHighlight(index);
@@ -336,6 +321,7 @@ public class MainPageController extends MainPageControllerVariables implements I
 
             // trec la semaforul cu emergency
             index = semaforEmergency - 1;
+            disableOtherCounter(index);
             semafoareImages[index].setVerde();
             highlight(index);
 
@@ -344,7 +330,8 @@ public class MainPageController extends MainPageControllerVariables implements I
             next_state_button.setDisable(true);
         } else if (!chk.isSelected()) {
             // am deselectat urgenta, deci revin la normal
-
+            fazaSemafor = FazaSemafor.GALBEN;
+            actualizareStareCurenta();
             semaforEmergency = -1;
 
             Emergency_value.setText(semaforEmergency != -1 ? String.valueOf(semaforEmergency) : "0");
@@ -352,9 +339,16 @@ public class MainPageController extends MainPageControllerVariables implements I
             enableAllEmergencyFlags();
             next_state_button.setDisable(false);
 
-            semafoareImages[index].setRosu();
+            semafoareImages[index].setGalben();
             //! CE FACEM CU COUNTERELE???????????????????????????????????????????????????????????????????????????????
         }
+    }
+
+    private void disableOtherCounter(int index) {
+        setCounterEnable(index, true);
+        setCounterEnable(nextIndex(index), false);
+        setCounterEnable(nextIndex(nextIndex(index)), false);
+        setCounterEnable(nextIndex(nextIndex(nextIndex(index))), false);
     }
 
     private void disableOtherEmergencyFlags(int index) {
@@ -424,13 +418,11 @@ public class MainPageController extends MainPageControllerVariables implements I
         return (float) 0.1F * (checkboxesSemafors[who].getFlags() - checkboxesSemafors[what].getFlags());
     }
 
-    private int getFlags() {
-        int rez = 0;
-
-        return rez;
-    }
-
     private float getAllFlagsDiff(int index) {
+        System.out.println(index);
+        System.out.println(nextIndex(index));
+        System.out.println(nextIndex(nextIndex(index)));
+        System.out.println(nextIndex(nextIndex(nextIndex(index))));
         return getFlagDiff(index, nextIndex(index)) +
                 getFlagDiff(index, nextIndex(nextIndex(index))) +
                 getFlagDiff(index, nextIndex(nextIndex(nextIndex(index))));
@@ -438,5 +430,9 @@ public class MainPageController extends MainPageControllerVariables implements I
 
     private void actualizareStareCurenta() {
         stare_curenta_value.setText(String.valueOf(fazaSemafor));
+    }
+
+    private void setCounterEnable(int index, boolean bool) {
+        debitSpinners[index].setEnabled(bool);
     }
 }

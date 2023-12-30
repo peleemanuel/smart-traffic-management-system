@@ -206,11 +206,6 @@ class CheckboxesSemafor {
         return rez;
     }
 
-    public void setEnabled(boolean bool) {
-        for (int i = 0; i < 3; i++)
-            checkboxes[i].setDisable(!bool);
-    }
-
     public void setDeselected() {
         for (int i = 0; i < 3; i++)
             checkboxes[i].setSelected(false);
@@ -230,9 +225,13 @@ class DebitSpinner {
     public int getDebit() {
         return spinners.get(0).getValue() + spinners.get(1).getValue() + spinners.get(2).getValue();
     }
-    //public void setCountersZero(){
-    //    spinners.get(0).setV
-    //}
+
+    public void setEnabled(boolean bool) {
+        spinners.get(0).setDisable(!bool);
+        spinners.get(1).setDisable(!bool);
+        spinners.get(2).setDisable(!bool);
+    }
+
 }
 
 class SemaforImages {
