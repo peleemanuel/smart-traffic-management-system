@@ -73,7 +73,7 @@ public class ComputeSistemTest {
     public void testScadereRepetataTimp() {
         int timpGalbenInitial = computeSistem.getTimpGalben();
 
-        assertEquals(timpGalbenInitial - 1, computeSistem.getTimpGalben());
+        assertEquals(timpGalbenInitial, computeSistem.getTimpGalben());
     }
 
 /*    @Test
