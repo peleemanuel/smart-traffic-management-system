@@ -11,9 +11,9 @@ public class Memorie {
     private static int KINIT = 1;
 
     private int[] debite = new int[4];
-    private int[] coef = new int[4];
+    private float[] coef = new float[4];
 
-    public Memorie(int[] debite, int[] coef) {
+    public Memorie(int[] debite, float[] coef) {
         this.debite = debite;
         this.coef = coef;
     }
@@ -43,8 +43,17 @@ public class Memorie {
         return this.debite;
     }
 
-    public int[] getCoef() {
+    public float[] getCoef() {
         return this.coef;
+    }
+
+    public float getCoefSemafor(int index) {
+        return coef[index];
+    }
+
+    //returneaza debitul semaforului cu indexul dat ca parametru
+    public int getDebitSemfor(int index) {
+        return debite[index];
     }
 
     //settere
@@ -52,8 +61,16 @@ public class Memorie {
         this.debite = debite;
     }
 
-    public void setCoef(int[] coef) {
+    public void setDebitSemafor(int index, int d) {
+        this.debite[index] = d;
+    }
+
+    public void setCoef(float[] coef) {
         this.coef = coef;
+    }
+
+    public void setCoefSemafor(int index, float c) {
+        this.coef[index] = c;
     }
 
 }
