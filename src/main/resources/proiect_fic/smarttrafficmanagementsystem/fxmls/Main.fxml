@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proiect_fic.smarttrafficmanagementsystem.controllers.MainPageController">
+    <ImageView fx:id="intersectie" fitHeight="600.0" fitWidth="600.0" layoutX="126.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+            <Image url="@../images/intersection.png" />
+        </image>
+    </ImageView>
+    <ImageView fx:id="rosu1" fitHeight="68.0" fitWidth="54.0" layoutX="469.0" layoutY="473.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+        <Image url="@../images/semafor_rosu.png" />
+    </ImageView>
+    <ImageView fx:id="galben1" fitHeight="68.0" fitWidth="54.0" layoutX="469.0" layoutY="473.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+        <Image url="@../images/semafor_galben.png" />
+    </ImageView>
+    <ImageView fx:id="verde1" fitHeight="68.0" fitWidth="54.0" layoutX="469.0" layoutY="473.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+        <Image url="@../images/semafor_verde.png" />
+    </ImageView>
+    <ImageView fx:id="rosu2" fitHeight="68.0" fitWidth="54.0" layoutX="358.0" layoutY="208.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
+        <Image url="@../images/semafor_rosu.png" />
+    </ImageView>
+    <ImageView fx:id="galben2" fitHeight="68.0" fitWidth="54.0" layoutX="358.0" layoutY="208.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
+        <Image url="@../images/semafor_galben.png" />
+    </ImageView>
+    <ImageView fx:id="verde2" fitHeight="68.0" fitWidth="54.0" layoutX="358.0" layoutY="208.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
+        <image>
+            <Image url="@../images/semafor_verde.png" />
+        </image>
+    </ImageView>
+    <ImageView fx:id="rosu3" fitHeight="68.0" fitWidth="54.0" layoutX="281.0" layoutY="395.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+        <image>
+            <Image url="@../images/semafor_rosu.png" />
+        </image>
+    </ImageView>
+    <ImageView fx:id="galben3" fitHeight="68.0" fitWidth="54.0" layoutX="281.0" layoutY="395.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+        <image>
+            <Image url="@../images/semafor_galben.png" />
+        </image>
+    </ImageView>
+    <ImageView fx:id="verde3" fitHeight="68.0" fitWidth="54.0" layoutX="281.0" layoutY="395.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+        <image>
+            <Image url="@../images/semafor_verde.png" />
+        </image>
+    </ImageView>
+    <ImageView fx:id="rosu4" fitHeight="68.0" fitWidth="54.0" layoutX="545.0" layoutY="282.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+            <Image url="@../images/semafor_rosu.png" />
+        </image>
+    </ImageView>
+    <ImageView fx:id="galben4" fitHeight="68.0" fitWidth="54.0" layoutX="545.0" layoutY="282.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+            <Image url="@../images/semafor_galben.png" />
+        </image>
+    </ImageView>
+    <ImageView fx:id="verde4" fitHeight="68.0" fitWidth="54.0" layoutX="545.0" layoutY="282.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+            <Image url="@../images/semafor_verde.png" />
+        </image>
+    </ImageView>
+    <Label fx:id="semafor1" alignment="CENTER" layoutX="466.0" layoutY="565.0" minHeight="75.0" minWidth="29.0" text="1" textFill="WHITE">
+        <font>
+            <Font size="32.0" />
+        </font>
+    </Label>
+    <Label fx:id="semafor2" alignment="CENTER" layoutX="355.0" layoutY="112.0" minHeight="75.0" minWidth="29.0" text="2" textFill="WHITE">
+        <font>
+            <Font size="32.0" />
+        </font>
+    </Label>
+    <Label fx:id="semafor3" alignment="CENTER" layoutX="200.0" layoutY="392.0" minHeight="75.0" minWidth="29.0" text="3" textFill="WHITE">
+        <font>
+            <Font size="32.0" />
+        </font>
+    </Label>
+    <Label fx:id="semafor4" alignment="CENTER" layoutX="639.0" layoutY="279.0" minHeight="75.0" minWidth="29.0" text="4" textFill="WHITE">
+        <font>
+            <Font size="32.0" />
+        </font>
+    </Label>
+    <Spinner fx:id="counter11" editable="true" layoutX="400.0" layoutY="676.0" prefHeight="25.0" prefWidth="59.0" />
+    <Spinner fx:id="counter12" editable="true" layoutX="459.0" layoutY="676.0" prefHeight="25.0" prefWidth="59.0" />
+    <Spinner fx:id="counter13" editable="true" layoutX="516.0" layoutY="676.0" prefHeight="25.0" prefWidth="59.0" />
+    <Spinner fx:id="counter21" editable="true" layoutX="293.0" layoutY="50.0" prefHeight="25.0" prefWidth="59.0" />
+    <Spinner fx:id="counter22" editable="true" layoutX="350.0" layoutY="50.0" prefHeight="25.0" prefWidth="59.0" />
+    <Spinner fx:id="counter23" editable="true" layoutX="410.0" layoutY="50.0" prefHeight="25.0" prefWidth="59.0" />
+    <Spinner fx:id="counter31" editable="true" layoutX="67.0" layoutY="380.0" prefHeight="25.0" prefWidth="59.0" />
+    <Spinner fx:id="counter32" editable="true" layoutX="67.0" layoutY="417.0" prefHeight="25.0" prefWidth="59.0" />
+    <Spinner fx:id="counter33" editable="true" layoutX="67.0" layoutY="451.0" prefHeight="25.0" prefWidth="59.0" />
+    <Spinner fx:id="counter41" editable="true" layoutX="726.0" layoutY="268.0" prefHeight="25.0" prefWidth="59.0" />
+    <Spinner fx:id="counter42" editable="true" layoutX="726.0" layoutY="305.0" prefHeight="25.0" prefWidth="59.0" />
+    <Spinner fx:id="counter43" editable="true" layoutX="726.0" layoutY="339.0" prefHeight="25.0" prefWidth="59.0" />
+    <Label fx:id="Semafor_curent" alignment="CENTER" layoutX="630.0" layoutY="48.0" text="Semafor curent: ">
+        <font>
+            <Font size="20.0" />
+        </font>
+    </Label>
+    <Label fx:id="index_semafor_value" alignment="CENTER" layoutX="775.0" layoutY="49.0" prefHeight="30.0" prefWidth="59.0" text="index" textAlignment="CENTER" textOverrun="CLIP">
+        <font>
+            <Font size="20.0" />
+        </font>
+    </Label>
+    <CheckBox id="1" fx:id="emergency1" layoutX="413.0" layoutY="526.0" mnemonicParsing="false" onAction="#emergency" text="Emergency" textFill="WHITE">
+        <font>
+            <Font size="20.0" />
+        </font>
+    </CheckBox>
+    <CheckBox id="2" fx:id="emergency2" layoutX="294.0" layoutY="188.0" mnemonicParsing="false" onAction="#emergency" text="Emergency" textFill="WHITE">
+        <font>
+            <Font size="20.0" />
+        </font>
+    </CheckBox>
+    <CheckBox id="3" fx:id="emergency3" layoutX="141.0" layoutY="481.0" mnemonicParsing="false" onAction="#emergency" text="Emergency" textFill="WHITE">
+        <font>
+            <Font size="20.0" />
+        </font>
+    </CheckBox>
+    <CheckBox id="4" fx:id="emergency4" layoutX="586.0" layoutY="239.0" mnemonicParsing="false" onAction="#emergency" text="Emergency" textFill="WHITE">
+        <font>
+            <Font size="20.0" />
+        </font>
+    </CheckBox>
+    <Button fx:id="next_state_button" layoutX="993.0" layoutY="47.0" mnemonicParsing="false" onAction="#nextState" text="Next state">
+        <font>
+            <Font size="15.0" />
+        </font>
+    </Button>
+    <Button fx:id="reset_button" layoutX="993.0" layoutY="81.0" mnemonicParsing="false" onAction="#init" prefHeight="31.0" prefWidth="88.0" text="Reset">
+        <font>
+            <Font size="15.0" />
+        </font>
+    </Button>
+    <Label fx:id="Tverde_display" layoutX="889.0" layoutY="265.0" text="Tverde:">
+        <font>
+            <Font size="18.0" />
+        </font>
+    </Label>
+    <Label fx:id="Tverde_value" layoutX="989.0" layoutY="265.0" text="Label">
+        <font>
+            <Font size="18.0" />
+        </font>
+    </Label>
+    <Label fx:id="Coldstart_display" layoutX="889.0" layoutY="245.0" text="Coldstart:">
+        <font>
+            <Font size="18.0" />
+        </font>
+    </Label>
+    <Label fx:id="Coldstart_value" layoutX="974.0" layoutY="245.0" text="true/false">
+        <font>
+            <Font size="18.0" />
+        </font>
+    </Label>
+    <Label fx:id="Debite" layoutX="879.0" layoutY="395.0" text="Debite">
+        <font>
+            <Font size="18.0" />
+        </font>
+    </Label>
+    <Label fx:id="Col_debite_1_display" layoutX="960.0" layoutY="361.0" text="1">
+        <font>
+            <Font size="15.0" />
+        </font>
+    </Label>
+    <Label fx:id="Col_debite_2_display" layoutX="1010.0" layoutY="361.0" text="2">
+        <font>
+            <Font size="15.0" />
+        </font>
+    </Label>
+    <Label fx:id="Col_debite_3_display" layoutX="1060.0" layoutY="361.0" text="3">
+        <font>
+            <Font size="15.0" />
+        </font>
+    </Label>
+    <Label fx:id="Col_debite_4_display" layoutX="1110.0" layoutY="361.0" text="4">
+        <font>
+            <Font size="15.0" />
+        </font>
+    </Label>
+    <Label fx:id="Col_debite_1_value" alignment="CENTER" layoutX="947.0" layoutY="398.0" minWidth="35.0" prefHeight="21.0" text="Label" textAlignment="CENTER">
+        <font>
+            <Font size="15.0" />
+        </font>
+    </Label>
+    <Label fx:id="Col_debite_2_value" alignment="CENTER" layoutX="997.0" layoutY="398.0" minHeight="21.0" minWidth="35.0" prefHeight="21.0" prefWidth="35.0" text="Label">
+        <font>
+            <Font size="15.0" />
+        </font>
+    </Label>
+    <Label fx:id="Col_debite_3_value" alignment="CENTER" layoutX="1047.0" layoutY="398.0" minHeight="21.0" minWidth="35.0" text="Label">
+        <font>
+            <Font size="15.0" />
+        </font>
+    </Label>
+    <Label fx:id="Col_debite_4_value" alignment="CENTER" layoutX="1097.0" layoutY="398.0" minHeight="21.0" minWidth="35.0" text="Label">
+        <font>
+            <Font size="15.0" />
+        </font>
+    </Label>
+    <Label fx:id="Coef" layoutX="887.0" layoutY="482.0" text="Coef">
+        <font>
+            <Font size="18.0" />
+        </font>
+    </Label>
+    <Label fx:id="Col_coef_1_display" layoutX="960.0" layoutY="448.0" text="1">
+        <font>
+            <Font size="15.0" />
+        </font>
+    </Label>
+    <Label fx:id="Col_coef_2_display" layoutX="1010.0" layoutY="448.0" text="2">
+        <font>
+            <Font size="15.0" />
+        </font>
+    </Label>
+    <Label fx:id="Col_coef_3_display" layoutX="1060.0" layoutY="448.0" text="3">
+        <font>
+            <Font size="15.0" />
+        </font>
+    </Label>
+    <Label fx:id="Col_coef_4_display" layoutX="1110.0" layoutY="448.0" text="4">
+        <font>
+            <Font size="15.0" />
+        </font>
+    </Label>
+    <Label fx:id="Col_coef_1_value" alignment="CENTER" layoutX="947.0" layoutY="485.0" minHeight="21.0" minWidth="35.0" text="Label">
+        <font>
+            <Font size="15.0" />
+        </font>
+    </Label>
+    <Label fx:id="Col_coef_2_value" alignment="CENTER" layoutX="997.0" layoutY="485.0" minHeight="21.0" minWidth="35.0" text="Label">
+        <font>
+            <Font size="15.0" />
+        </font>
+    </Label>
+    <Label fx:id="Col_coef_3_value" alignment="CENTER" layoutX="1047.0" layoutY="485.0" minHeight="21.0" minWidth="35.0" text="Label">
+        <font>
+            <Font size="15.0" />
+        </font>
+    </Label>
+    <Label fx:id="Col_coef_4_value" alignment="CENTER" layoutX="1097.0" layoutY="485.0" minHeight="21.0" minWidth="35.0" text="Label">
+        <font>
+            <Font size="15.0" />
+        </font>
+    </Label>
+    <Label fx:id="Emergency_display" layoutX="889.0" layoutY="285.0" text="Emergency:">
+        <font>
+            <Font size="18.0" />
+        </font>
+    </Label>
+    <Label fx:id="Emergency_value" alignment="CENTER" layoutX="986.0" layoutY="285.0" prefHeight="27.0" prefWidth="25.0" text="0">
+        <font>
+            <Font size="18.0" />
+        </font>
+    </Label>
+    <CheckBox fx:id="emergency_flag11" layoutX="439.0" layoutY="646.0" mnemonicParsing="false" />
+    <CheckBox fx:id="emergency_flag12" layoutX="472.0" layoutY="646.0" mnemonicParsing="false" />
+    <CheckBox fx:id="emergency_flag13" layoutX="507.0" layoutY="646.0" mnemonicParsing="false" />
+    <CheckBox fx:id="emergency_flag21" layoutX="328.0" layoutY="88.0" mnemonicParsing="false" />
+    <CheckBox fx:id="emergency_flag22" layoutX="361.0" layoutY="88.0" mnemonicParsing="false" />
+    <CheckBox fx:id="emergency_flag23" layoutX="396.0" layoutY="88.0" mnemonicParsing="false" />
+    <CheckBox fx:id="emergency_flag31" layoutX="148.0" layoutY="384.0" mnemonicParsing="false" />
+    <CheckBox fx:id="emergency_flag32" layoutX="148.0" layoutY="421.0" mnemonicParsing="false" />
+    <CheckBox fx:id="emergency_flag33" layoutX="148.0" layoutY="455.0" mnemonicParsing="false" />
+    <CheckBox fx:id="emergency_flag41" layoutX="694.0" layoutY="274.0" mnemonicParsing="false" />
+    <CheckBox fx:id="emergency_flag42" layoutX="694.0" layoutY="311.0" mnemonicParsing="false" />
+    <CheckBox fx:id="emergency_flag43" layoutX="694.0" layoutY="345.0" mnemonicParsing="false" />
+    <Label layoutX="145.0" layoutY="80.0" text="Bifam pentru flagul&#10;de pe fiecare banda">
+      <font>
+         <Font size="14.0" />
+      </font></Label>
+   <Label layoutX="160.0" layoutY="50.0" text="Flag marker">
+      <font>
+         <Font size="18.0" />
+      </font>
+   </Label>
+   <Label fx:id="stare_curenta_value" layoutX="775.0" layoutY="73.0" text="galben intermitent">
+      <font>
+         <Font size="20.0" />
+      </font>
+   </Label>
+   <Label fx:id="stare_curent_display" layoutX="649.0" layoutY="73.0" text="Stare curenta:">
+      <font>
+         <Font size="20.0" />
+      </font>
+   </Label>
+   <Button fx:id="error_button" layoutX="993.0" layoutY="115.0" mnemonicParsing="false" onAction="#error" prefHeight="31.0" prefWidth="88.0" text="ERROR">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Button>
+</AnchorPane>

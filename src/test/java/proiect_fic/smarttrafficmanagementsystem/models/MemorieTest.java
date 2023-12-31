@@ -10,12 +10,12 @@ import static org.junit.jupiter.api.Assertions.*;
 public class MemorieTest {
     private Memorie memorie;
     private int[] debite;
-    private int[] coef;
+    private float[] coef;
 
     @BeforeEach
     public void setUp() {
         debite = new int[]{10, 20, 30, 40};
-        coef = new int[]{3, 4, 5, 6};
+        coef = new float[]{3, 4, 5, 6};
         memorie = new Memorie(debite, coef);
     }
 
@@ -64,7 +64,7 @@ public class MemorieTest {
     public void testGetSetCoef() {
         assertArrayEquals(coef, memorie.getCoef(), "Coef array should match initial values");
 
-        int[] newCoef = new int[]{6, 7, 8, 9};
+        float[] newCoef = new float[]{6, 7, 8, 9};
         memorie.setCoef(newCoef);
         assertArrayEquals(newCoef, memorie.getCoef(), "Coef array should match new values");
     }
