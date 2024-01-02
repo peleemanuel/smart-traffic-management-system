@@ -8,6 +8,7 @@ public class ComputeSistem {
     private int index;
     private int sumaDebite;
     private boolean coldstart;
+    private EmergencySenzor[] emergencies=new EmergencySenzor[4]; //fiecare set de benzi din interesectie care un emergencysezor reprezentat ca un checkbox
 
     // constructor
     public ComputeSistem(Semafor[] semafoare, Memorie mem, int timpVerde, int timpGalben, int index, int sumaDebite, boolean coldstart) {
@@ -62,7 +63,7 @@ public class ComputeSistem {
     public void setSumaDebite(int sumaDebite) {
         this.sumaDebite = sumaDebite;
     }
-
+//*********** se foloseste in loc de updateColdtart()
     public boolean getColdstartStatus() {
         return coldstart;
     }
@@ -123,7 +124,10 @@ public int sumaDebite(){
     //aceasta functie are ca parametru index-ul semaforului pt care calculez timpul
     //Tverde(i+1) = Tmin + k*(Debit(i+1)/Sum(Debit(i+2,..)) * (Tmax-Tmin)
     public int calculTimpVerdeUrmator(int index) {
+        //if(sumaDebite!=0) //aceasta conditie e doar ca sa nu mai avem erori
         timpVerde = (int) (Memorie.getTMIN() + mem.getCoefSemafor(index) *( mem.getDebitSemfor(index)/sumaDebite()) * (Memorie.getTMAX() - Memorie.getTMIN())); //! debit(index)/ suma_debite
+       if(timpVerde>Memorie.getTMAX())
+           return Memorie.getTMAX();
         return timpVerde;
     }
 
@@ -210,4 +214,22 @@ public int sumaDebite(){
         }
         mem.setCoefSemafor(index, rez);
     }
+
+
+    public void incrementIndex() {
+        if (index == 3) {
+            index = 0;
+            coldstart=false;
+        } else {
+            index++;
+        }
+    }
+
+    //calculeaza indexul urmator
+    private int nextIndex(int index) {
+        return (index + 1) % 4;
+    }
+
+
+
 }

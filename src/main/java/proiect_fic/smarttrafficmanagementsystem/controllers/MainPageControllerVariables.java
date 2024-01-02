@@ -278,4 +278,14 @@ class Semafor_complet {
         this.verde = verde;
         this.semafor_date = semafor;
     }
+
+    public void setRosu(ImageView rosu) {
+        this.rosu = rosu;
+    }
+    public void setGalben(ImageView galben) {
+        this.galben = galben;
+    }
+    public void setVerde(ImageView verde) {
+        this.verde = verde;
+    }
 }

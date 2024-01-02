@@ -41,4 +41,5 @@ public class ContorSenzor {
     public void reseteazaContor() {
         this.numarMasiniDetectate = 0;
     }
+
 }
