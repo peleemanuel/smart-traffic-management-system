@@ -254,7 +254,11 @@ public class MainPageController extends MainPageControllerVariables implements I
                     coefs[nextIndex(index)] = imp;
 
                     // trebuie sa calculez cu formula
-                    timp = formulaTimpVerde(index);
+                    try {
+                        timp = formulaTimpVerde(index);
+                    } catch (Exception e) {
+                        timp = Memorie.getTMED();
+                    }
                 }
 
                 // schimb timpul de verde
@@ -280,6 +284,10 @@ public class MainPageController extends MainPageControllerVariables implements I
                     Tverde_value.setText("120");
                     unHighlight(index);
                     fazaSemafor = FazaSemafor.GALBEN_INTERMITENT;
+                    debitSpinners[0].setEnabled(true);
+                    debitSpinners[1].setEnabled(true);
+                    debitSpinners[2].setEnabled(true);
+                    debitSpinners[3].setEnabled(true);
                     actualizareStareCurenta();
                 } else {
                     // continui la verde
@@ -429,8 +437,8 @@ public class MainPageController extends MainPageControllerVariables implements I
     }
 
     private int formulaTimpVerde(int index) {
-        int rez=(int) (10 + coefs[nextIndex(index)] * (debite[nextIndex(index)] / getDebite()) * 30);
-        if(rez>Memorie.getTMAX())
+        int rez = (int) (10 + coefs[nextIndex(index)] * (debite[nextIndex(index)] / getDebite()) * 30);
+        if (rez > Memorie.getTMAX())
             return Memorie.getTMAX();
         return rez;
     }
