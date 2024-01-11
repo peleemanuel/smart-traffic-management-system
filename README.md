@@ -22,6 +22,14 @@ Sistemul nostru utilizează o serie de senzori și algoritmi avansați pentru a 
 
 Suntem deschiși colaborărilor și contribuțiilor din partea comunității de dezvoltatori, ingineri de trafic, și entuziaști tehnologici. Orice feedback, sugestie sau idee nouă este binevenită pentru a îmbunătăți continuu acest sistem.
 
+## Imaginea schemei hardware
+
+![Schema Hard](https://github.com/peleemanuel/smart-traffic-management-system/blob/Docs/Presentation/docs/schema_image.png)
+
+## Imaginea interfeței software
+
+![App Frontend](https://github.com/peleemanuel/smart-traffic-management-system/blob/Docs/Presentation/docs/frontend_image.png)
+
 ## Contact și Suport
 
 Pentru mai multe informații, întrebări sau sugestii, vă rugăm să ne contactați prin intermediul acestui repository GitHub. Echipa noastră este mereu gata să răspundă și să colaboreze pentru un trafic mai inteligent și mai eficient.
