@@ -273,7 +273,7 @@ public class MainPageController extends MainPageControllerVariables implements I
                 break;
             case ROSU:
                 // cand sunt in rosu trebuie sa verific daca trec la verde sau la galben_intermitent
-                if (getDebite() == 0) {
+                if (getDebite() == 0 && !coldStart) {
                     // galben intermitent => toate semafoarele sunt galbene, scot highlight
                     semafoareImages[0].setGalben();
                     semafoareImages[1].setGalben();
@@ -311,7 +311,7 @@ public class MainPageController extends MainPageControllerVariables implements I
                 break;
             case GALBEN_INTERMITENT:
                 //cand sunt in galben intermitent verific daca stau pe loc sau trec la verde
-                if (getDebite() >= 10) {
+                if (getDebiteGalben() >= 10) {
                     // ies din faza de galben_intermitent
                     init();
                 }
@@ -403,12 +403,20 @@ public class MainPageController extends MainPageControllerVariables implements I
     private int getDebite() {
         int aux = 0;
         for (int i = 0; i < 4; i++) {
-            aux += debitSpinners[i].getDebit();
+            aux += Integer.parseInt(Col_debite[i].getText());
         }
-        System.out.println(aux);
+
         return aux;
     }
 
+    private int getDebiteGalben() {
+        int aux = 0;
+        for (int i = 0; i < 4; i++) {
+            aux += debitSpinners[i].getDebit();
+        }
+
+        return aux;
+    }
 
     private void resetCounter(int index) {
         switch (index) {
@@ -460,10 +468,7 @@ public class MainPageController extends MainPageControllerVariables implements I
 
     //nu mai ai nevoie ca e deja in calculCoeficient() in ComputeSistem
     private float getAllFlagsDiff(int index) {
-        System.out.println(index);
-        System.out.println(nextIndex(index));
-        System.out.println(nextIndex(nextIndex(index)));
-        System.out.println(nextIndex(nextIndex(nextIndex(index))));
+
         return getFlagDiff(index, nextIndex(index)) +
                 getFlagDiff(index, nextIndex(nextIndex(index))) +
                 getFlagDiff(index, nextIndex(nextIndex(nextIndex(index))));
