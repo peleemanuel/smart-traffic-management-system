@@ -40,6 +40,8 @@ Suntem deschiși colaborărilor și contribuțiilor din partea comunității de 
 
 Pentru mai multe informații, întrebări sau sugestii, vă rugăm să ne contactați prin intermediul acestui repository GitHub. Echipa noastră este mereu gata să răspundă și să colaboreze pentru un trafic mai inteligent și mai eficient.
 
+## 
+Acest proiect e licentiat si creat in cardul materiei universitare de Fundamente in Ingineria Calculatoarelor.
 ---
 
 _Smart Traffic Management System: Conducând inovația în gestionarea traficului urban._
